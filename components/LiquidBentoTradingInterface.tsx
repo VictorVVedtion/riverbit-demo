@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingUp, TrendingDown, BarChart3, DollarSign, Zap, Brain, Target, Activity, X, Lightbulb, ArrowRight, MessageCircle, Send, Mic } from 'lucide-react';
+import { TrendingUp, TrendingDown, BarChart3, DollarSign, Zap, Brain, Target, Activity, X, Lightbulb, ArrowRight } from 'lucide-react';
 import LiquidGlassCard from './ui/LiquidGlassCard';
 import RiverBentoGrid from './ui/RiverBentoGrid';
 import { Button } from './ui/button';
@@ -570,41 +570,31 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
             {/* Enhanced Trading Header */}
             <div className="flex items-center justify-between mb-2">
               <div>
-                <h3 className="text-xl font-bold text-white">
-                  {showAIChatDialog ? 'AI Trading Assistant' : 'Trade BTC'}
-                </h3>
-                <p className="text-sm text-gray-400">
-                  {showAIChatDialog ? 'Intelligent Trading Guidance' : 'Professional Order Entry'}
-                </p>
+                <h3 className="text-xl font-bold text-white">Trade BTC</h3>
+                <p className="text-sm text-gray-400">Professional Order Entry</p>
               </div>
               <div className="flex items-center space-x-2 bg-slate-800/50 rounded-xl p-1 border border-slate-700">
                 <Button 
                   size="sm" 
-                  variant={side === 'buy' && !showAIChatDialog ? 'default' : 'ghost'}
-                  onClick={() => {
-                    setSide('buy');
-                    setShowAIChatDialog(false);
-                  }}
-                  className={`button-press smooth-transition touch-feedback touch-scale px-4 py-2.5 rounded-lg font-semibold flex-1 ${side === 'buy' && !showAIChatDialog ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/30' : 'text-green-400 hover:bg-green-400/10'}`}
+                  variant={side === 'buy' ? 'default' : 'ghost'}
+                  onClick={() => setSide('buy')}
+                  className={`button-press smooth-transition touch-feedback touch-scale px-4 py-2.5 rounded-lg font-semibold flex-1 ${side === 'buy' ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/30' : 'text-green-400 hover:bg-green-400/10'}`}
                 >
                   BUY
                 </Button>
                 <Button 
                   size="sm" 
-                  variant={side === 'sell' && !showAIChatDialog ? 'default' : 'ghost'}
-                  onClick={() => {
-                    setSide('sell');
-                    setShowAIChatDialog(false);
-                  }}
-                  className={`button-press smooth-transition touch-feedback touch-scale px-4 py-2.5 rounded-lg font-semibold flex-1 ${side === 'sell' && !showAIChatDialog ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/30' : 'text-red-400 hover:bg-red-400/10'}`}
+                  variant={side === 'sell' ? 'default' : 'ghost'}
+                  onClick={() => setSide('sell')}
+                  className={`button-press smooth-transition touch-feedback touch-scale px-4 py-2.5 rounded-lg font-semibold flex-1 ${side === 'sell' ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/30' : 'text-red-400 hover:bg-red-400/10'}`}
                 >
                   SELL
                 </Button>
                 <Button 
                   size="sm" 
-                  variant={showAIChatDialog ? 'default' : 'ghost'}
+                  variant="ghost"
                   onClick={() => setShowAIChatDialog(!showAIChatDialog)}
-                  className={`button-press smooth-transition touch-feedback touch-scale px-3 py-2.5 rounded-lg font-medium flex items-center space-x-1 relative ${showAIChatDialog ? 'bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:bg-purple-400/10 hover:text-purple-300'}`}
+                  className={`button-press smooth-transition touch-feedback touch-scale px-3 py-2.5 rounded-lg font-medium flex items-center space-x-1 relative ${showAIChatDialog ? 'text-purple-300 bg-purple-500/15 border border-purple-400/30' : 'text-purple-400 hover:bg-purple-400/10 hover:text-purple-300'}`}
                   title="AI交易对话 (点击打开聊天)"
                 >
                   <Brain className="w-4 h-4" />
@@ -615,60 +605,6 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
               </div>
             </div>
 
-            {/* 条件渲染：AI对话模式 or 交易表单模式 */}
-            {showAIChatDialog ? (
-              // AI Trading Chat Interface
-              <div className="flex-1 flex flex-col">
-                {/* AI Chat Container */}
-                <div className="flex-1 bg-gradient-to-br from-purple-900/20 to-purple-800/10 rounded-xl border border-purple-400/30 p-4">
-                  <TradingAssistantChat
-                    userAddress={userAddress}
-                    isConnected={isConnected}
-                    accountBalance={125340.56}
-                    className="h-full border-0 bg-transparent"
-                    selectedTradingPair="BTC/USDT"
-                    currentPrice={btcPrice}
-                    onPlanExecute={async (plan) => {
-                      console.log('执行交易计划:', plan);
-                      // 应用AI建议到交易表单
-                      setSide(plan.side || 'buy');
-                      setLeverage(plan.leverage || 10);
-                      setAmount(plan.amount?.toString() || '1000');
-                      if (plan.price) setPrice(plan.price.toString());
-                      // 切换回交易模式
-                      setShowAIChatDialog(false);
-                    }}
-                    onPlanBookmark={(planId) => {
-                      console.log('收藏计划:', planId);
-                    }}
-                    onPlanShare={(plan) => {
-                      console.log('分享计划:', plan);
-                    }}
-                  />
-                </div>
-                
-                {/* AI Quick Actions */}
-                <div className="mt-4 grid grid-cols-2 gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30"
-                    onClick={() => setShowAIChatDialog(false)}
-                  >
-                    ↩️ 返回交易
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30"
-                  >
-                    📊 市场分析
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              // Trading Form Interface
-              <>
             {/* Professional Quick Actions */}
             <div className="space-y-3 p-4 bg-slate-900/60 rounded-xl border border-slate-700/50">
               <div className="flex items-center justify-between mb-2">
@@ -891,9 +827,88 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
                 </div>
               </div>
             </div>
-              </>
-            )}
 
+            {/* AI Trading Assistant Panel - Enhanced with Mobile Optimization */}
+            {showAIAssistant && (
+              <div className="mt-4 p-4 bg-gradient-to-br from-purple-900/20 to-purple-800/10 rounded-xl border border-purple-400/30 animate-slide-in-right">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <Brain className="w-4 h-4 text-purple-400" />
+                    <h4 className="text-sm font-bold text-purple-400">AI Trading Assistant</h4>
+                    <Badge variant="outline" className="text-xs border-green-400 text-green-400 ml-2">
+                      Live
+                    </Badge>
+                  </div>
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    onClick={() => setShowAIAssistant(false)}
+                    className="h-6 w-6 p-0 text-purple-400 hover:text-purple-300"
+                  >
+                    <X className="w-3 h-3" />
+                  </Button>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="text-xs text-purple-300 bg-purple-900/20 rounded-lg p-3 border border-purple-400/20">
+                    <div className="flex items-start space-x-2">
+                      <Lightbulb className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <div className="font-semibold mb-1">AI Market Analysis</div>
+                        <div>BTC showing bullish momentum above $67,000. RSI indicates healthy correction potential.</div>
+                        <div className="mt-2 text-xs text-purple-400">
+                          Entry: $67,200 • SL: $66,500 • TP: $68,800
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="w-full text-xs bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30 h-9 font-medium"
+                      onClick={() => {
+                        setSide('buy');
+                        setLeverage(10);
+                        setAmount('0.1');
+                        setPrice('67200');
+                      }}
+                    >
+                      <ArrowRight className="w-3 h-3 mr-2" />
+                      Apply AI Strategy
+                    </Button>
+                    
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="text-xs bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30 h-8"
+                      >
+                        📊 Analysis
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="text-xs bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30 h-8"
+                      >
+                        🎯 Alerts
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="text-xs text-gray-400 border-t border-purple-400/20 pt-2">
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center space-x-1">
+                        <Activity className="w-3 h-3" />
+                        <span>Confidence: 78%</span>
+                      </span>
+                      <span className="text-xs opacity-70">Updated 30s ago</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </LiquidGlassCard>
 
@@ -1135,7 +1150,6 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
           }
         }
       `}</style>
-
 
     </div>
   );
