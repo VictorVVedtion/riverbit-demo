@@ -1,0 +1,1646 @@
+[
+  {
+    "inputs": [],
+    "name": "AccessControlBadConfirmation",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "neededRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "AccessControlUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidInitialization",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotInitializing",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ReentrancyGuardReentrantCall",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "reason",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "executor",
+        "type": "address"
+      }
+    ],
+    "name": "BucketEmergencyStop",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "targetWeight",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "hardCapLoss",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      }
+    ],
+    "name": "BucketInitialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "currentLoss",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "hardCap",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "HardCapTriggered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "version",
+        "type": "uint64"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "claimId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "compensationAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "InsuranceClaimExecuted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "claimId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "lossAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "claimAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "InsuranceClaimFiled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "oldManager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newManager",
+        "type": "address"
+      }
+    ],
+    "name": "ManagerUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "performancePeriod",
+        "type": "uint256"
+      }
+    ],
+    "name": "PerformanceFeePaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalAssets",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum LPBucketManager.BucketType[]",
+        "name": "rebalancedBuckets",
+        "type": "uint8[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "oldAllocations",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "newAllocations",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "RebalanceExecuted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "previousAdminRole",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "newAdminRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RoleAdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleGranted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleRevoked",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "ADMIN_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "BUCKET_MANAGER_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DEFAULT_ADMIN_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "OPERATOR_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "REBALANCER_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allClaims",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "allocationHistory",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "claimId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "approveInsuranceClaim",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "baseAsset",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "bucketEmergencyStop",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "bucketRevenue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "bucketTypes",
+    "outputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "buckets",
+    "outputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum LPBucketManager.BucketStatus",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "allocation",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "targetWeight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "currentWeight",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "hardCapLoss",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "currentLoss",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "peakValue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "hardCapTriggered",
+        "type": "bool"
+      },
+      {
+        "internalType": "int256",
+        "name": "totalPnL",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "dailyPnL",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalFees",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "trades",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "managementFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "performanceFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lastRebalanceTime",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lastPnLUpdate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "insuranceCoverage",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "insuranceClaimed",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "emergencyWithdrawals",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "coreContract",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "dailySnapshots",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      }
+    ],
+    "name": "distributeBucketFees",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "reason",
+        "type": "string"
+      }
+    ],
+    "name": "emergencyStopBucket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "emergencyStopCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "executeGlobalRebalance",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "claimId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "executeInsuranceClaim",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllAllocations",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "allocations",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      }
+    ],
+    "name": "getBucket",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "enum LPBucketManager.BucketType",
+            "name": "bucketType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum LPBucketManager.BucketStatus",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "allocation",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "targetWeight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentWeight",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "hardCapLoss",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentLoss",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "peakValue",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "hardCapTriggered",
+            "type": "bool"
+          },
+          {
+            "internalType": "int256",
+            "name": "totalPnL",
+            "type": "int256"
+          },
+          {
+            "internalType": "int256",
+            "name": "dailyPnL",
+            "type": "int256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalFees",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "trades",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "manager",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "managementFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "performanceFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastRebalanceTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastPnLUpdate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "insuranceCoverage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "insuranceClaimed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "emergencyWithdrawals",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LPBucketManager.LPBucket",
+        "name": "bucket",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      }
+    ],
+    "name": "getBucketMetrics",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "sharpeRatio",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxDrawdown",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "volatility",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "winRate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "averageWin",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "averageLoss",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lastUpdated",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LPBucketManager.PerformanceMetrics",
+        "name": "metrics",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      }
+    ],
+    "name": "getBucketRevenue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalRevenue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "managerRevenue_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "insuranceClaimed",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "claimId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getInsuranceClaim",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "claimId",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "enum LPBucketManager.BucketType",
+            "name": "bucketType",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lossAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "claimAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "approved",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "executed",
+            "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "reason",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct LPBucketManager.InsuranceClaim",
+        "name": "claim",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRoleAdmin",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTargetAllocations",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "targets",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "globalEmergencyMode",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "grantRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "hasRole",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_baseAsset",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_coreContract",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_admin",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "insuranceClaims",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "claimId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lossAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "claimAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "approved",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "executed",
+        "type": "bool"
+      },
+      {
+        "internalType": "string",
+        "name": "reason",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "insuranceFund",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastGlobalRebalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "managerRevenue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "performanceMetrics",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "sharpeRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxDrawdown",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "volatility",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "winRate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "averageWin",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "averageLoss",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lastUpdated",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "pnlHistory",
+    "outputs": [
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rebalanceConfig",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "maxWeightDeviation",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rebalanceInterval",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minRebalanceAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "autoRebalanceEnabled",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippageTolerance",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "emergencyThreshold",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rebalancingInProgress",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "callerConfirmation",
+        "type": "address"
+      }
+    ],
+    "name": "renounceRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      }
+    ],
+    "name": "resumeBucket",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "revenueDistribution",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "revokeRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "address",
+        "name": "manager",
+        "type": "address"
+      }
+    ],
+    "name": "setBucketManager",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "setGlobalEmergencyMode",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_insuranceFund",
+        "type": "address"
+      }
+    ],
+    "name": "setInsuranceFund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "shouldRebalance",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "needed",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "targetAllocations",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "totalInsuranceClaimed",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalManagedAssets",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalRevenueGenerated",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "int256",
+        "name": "pnlChange",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fees",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tradeCount",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateBucketPerformance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum LPBucketManager.BucketType",
+        "name": "bucketType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "newWeight",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateBucketWeight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

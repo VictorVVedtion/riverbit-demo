@@ -1,37 +1,43 @@
-import { createAppKit } from '@reown/appkit'
-import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { arbitrum, arbitrumSepolia } from 'viem/chains'
 import { createConfig, http } from 'wagmi'
+import { metaMask, walletConnect, injected } from 'wagmi/connectors'
 
-// 1. Demo projectId - 不使用外部API
-export const projectId = '00000000000000000000000000000000' // Demo模式，不连接外部服务
+// 1. Demo projectId - 简化配置避免外部API调用
+export const projectId = 'demo-riverbit-trading-platform'
 
-// 2. Create wagmiAdapter with proper network configuration
-const wagmiAdapter = new WagmiAdapter({
-  projectId,
-  networks: [arbitrumSepolia, arbitrum]
+// 2. Development environment detection
+const isDevelopment = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+const currentPort = typeof window !== 'undefined' ? window.location.port : '5175'
+const baseUrl = isDevelopment ? `http://localhost:${currentPort}` : 'https://riverbit-demo.vercel.app'
+
+// 3. Create simplified wagmi config without external dependencies
+export const config = createConfig({
+  chains: [arbitrumSepolia, arbitrum],
+  connectors: [
+    injected(),
+    metaMask(),
+    walletConnect({
+      projectId: 'demo',
+      metadata: {
+        name: 'RiverBit Demo',
+        description: 'Demo Trading Platform',
+        url: baseUrl,
+        icons: []
+      },
+      showQrModal: false // 禁用QR模态框避免API调用
+    })
+  ],
+  transports: {
+    [arbitrumSepolia.id]: http('https://sepolia-rollup.arbitrum.io/rpc'),
+    [arbitrum.id]: http('https://arb1.arbitrum.io/rpc')
+  }
 })
 
-// 3. Create modal with minimal configuration
-export const modal = createAppKit({
-  adapters: [wagmiAdapter],
-  projectId,
-  networks: [arbitrumSepolia, arbitrum],
-  defaultNetwork: arbitrumSepolia,
-  metadata: {
-    name: 'RiverBit Demo',
-    description: 'Demo Trading Platform',
-    url: 'http://localhost:5173',
-    icons: []
-  },
-  themeMode: 'dark',
-  enableAnalytics: false,
-  enableOnRamp: false,
-  enableSwaps: false
-})
-
-// 4. Create wagmi config
-export const config = wagmiAdapter.wagmiConfig
+// 3. Create modal placeholder (for compatibility)
+export const modal = {
+  open: () => console.log('Demo mode: Wallet connection'),
+  close: () => console.log('Demo mode: Wallet disconnection')
+}
 
 // 5. Export types for type safety
 export type Config = typeof config
@@ -43,10 +49,10 @@ export const NETWORK_CONFIG = {
     name: 'Arbitrum Sepolia',
     shortName: 'arbsep',
     chainId: arbitrumSepolia.id,
-    rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
+    rpcUrl: 'https://arbitrum-sepolia.blockpi.network/v1/rpc/public',
     blockExplorer: 'https://sepolia.arbiscan.io',
     contracts: {
-      riverbitCore: '0x43bf3e410fd22e4cD1081E60F31600BDdC15ea96', // Deployed!
+      riverbitCoreV2: '0xA12BdBf28af28EC5C5A3d9DDA65F637d8B683a5a', // Latest deployed address
       usdc: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d' // Arbitrum Sepolia USDC
     }
   },
@@ -54,10 +60,10 @@ export const NETWORK_CONFIG = {
     name: 'Arbitrum One',
     shortName: 'arb',
     chainId: arbitrum.id,
-    rpcUrl: 'https://arb1.arbitrum.io/rpc',
+    rpcUrl: 'https://arbitrum.blockpi.network/v1/rpc/public',
     blockExplorer: 'https://arbiscan.io',
     contracts: {
-      riverbitCore: '0x0000000000000000000000000000000000000000', // To be deployed
+      riverbitCoreV2: '0x0000000000000000000000000000000000000000', // To be deployed
       usdc: '0xA0b86a33E6417FA891A4F0A7fD9F6CdDFbC65Ea' // Arbitrum One USDC
     }
   }

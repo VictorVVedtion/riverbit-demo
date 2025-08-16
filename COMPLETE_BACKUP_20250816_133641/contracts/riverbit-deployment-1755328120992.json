@@ -1,0 +1,16 @@
+{
+  "network": "arbitrumSepolia",
+  "chainId": 421614,
+  "timestamp": 1755328112478,
+  "contracts": {
+    "RiverBitCoreV2": {
+      "address": "0x9025639BE83a09eD1b67f4e2aF4dab89C32C484E",
+      "txHash": "0xfa155aec9d31c4923a2e3e8a0934b0e1059dce710a4711dfce19f75121912c78"
+    },
+    "SAuthSettlement": {
+      "address": "0xf2db9347fDDd716e20acAb5f5BF58B63c50dc906",
+      "txHash": "0x049a5b1495d13451567113e1edf182253e14285dabe8ae1424ee64a1f27b9793"
+    }
+  },
+  "gasUsed": 0
+}
