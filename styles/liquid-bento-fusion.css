@@ -1,0 +1,715 @@
+/* ========== RiverBit Liquid Glass × Bento Grid Fusion System ========== */
+/* 统一液态玻璃系统，融合河流主题和Bento Grid模块化设计 */
+
+/* ==================== 河流主题配色系统 ==================== */
+:root {
+  /* RiverBit 河流蓝色系 - 品牌核心 */
+  --river-surface: #06b6d4;      /* 清澈水面蓝 */
+  --river-depth: #0891b2;        /* 深水蓝 */
+  --river-bed: #164e63;          /* 河床深蓝 */
+  --river-foam: #67e8f9;         /* 水花泡沫白 */
+  --river-glow: #22d3ee;         /* 河流发光效果 */
+  --river-mist: #cffafe;         /* 河流雾气 */
+  
+  /* 交易专用色彩 */
+  --river-profit: #00ff88;       /* 明亮盈利绿 */
+  --river-loss: #ff0055;         /* 鲜艳亏损红 */
+  --river-neutral: #94a3b8;      /* 中性灰蓝 */
+  
+  /* 液态玻璃强度分级 - 专业级增强 */
+  --glass-blur-nano: blur(8px);      /* 轻微模糊 - 文字区域 */
+  --glass-blur-subtle: blur(16px);   /* 标准模糊 - 数据展示 */
+  --glass-blur-medium: blur(24px);   /* 中等模糊 - 功能卡片 */
+  --glass-blur-intense: blur(32px);  /* 强烈模糊 - 装饰背景 */
+  --glass-blur-ultra: blur(48px);    /* 极致模糊 - 展示效果 */
+  
+  /* 透明度层级 - iOS风格增强 */
+  --glass-alpha-nano: 0.08;
+  --glass-alpha-subtle: 0.15;
+  --glass-alpha-medium: 0.22;
+  --glass-alpha-intense: 0.35;
+  --glass-alpha-ultra: 0.45;
+  
+  /* 河流动态渐变 */
+  --river-gradient-flow: linear-gradient(
+    135deg,
+    var(--river-surface) 0%,
+    var(--river-depth) 25%,
+    var(--river-bed) 50%,
+    var(--river-depth) 75%,
+    var(--river-surface) 100%
+  );
+  
+  --river-gradient-calm: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.12) 0%,
+    rgba(8, 145, 178, 0.08) 50%,
+    rgba(22, 78, 99, 0.15) 100%
+  );
+}
+
+/* ==================== 统一液态玻璃基础类 ==================== */
+.river-glass-base {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  
+  /* GPU加速优化 */
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  
+  /* 基础边框和阴影 */
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(6, 182, 212, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 液态玻璃反射层 */
+.river-glass-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(6, 182, 212, 0.08) 100%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==================== 液态玻璃强度分级 ==================== */
+
+/* Nano级别 - 文字和重要数据区域 */
+.river-glass-nano {
+  background: rgba(15, 23, 42, var(--glass-alpha-nano));
+  backdrop-filter: var(--glass-blur-nano);
+  -webkit-backdrop-filter: var(--glass-blur-nano);
+}
+
+/* Subtle级别 - 一般数据展示 */
+.river-glass-subtle {
+  background: rgba(15, 23, 42, var(--glass-alpha-subtle));
+  backdrop-filter: var(--glass-blur-subtle);
+  -webkit-backdrop-filter: var(--glass-blur-subtle);
+}
+
+/* Medium级别 - 功能卡片 */
+.river-glass-medium {
+  background: var(--river-gradient-calm);
+  backdrop-filter: var(--glass-blur-medium);
+  -webkit-backdrop-filter: var(--glass-blur-medium);
+}
+
+/* Intense级别 - 重要模块背景 */
+.river-glass-intense {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, var(--glass-alpha-intense)) 0%,
+    rgba(8, 145, 178, var(--glass-alpha-medium)) 50%,
+    rgba(22, 78, 99, var(--glass-alpha-intense)) 100%
+  );
+  backdrop-filter: var(--glass-blur-intense);
+  -webkit-backdrop-filter: var(--glass-blur-intense);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* Ultra级别 - 展示和装饰用 */
+.river-glass-ultra {
+  background: var(--river-gradient-flow);
+  background-size: 400% 400%;
+  backdrop-filter: var(--glass-blur-ultra);
+  -webkit-backdrop-filter: var(--glass-blur-ultra);
+  border-color: rgba(6, 182, 212, 0.4);
+  animation: riverFlow 8s ease-in-out infinite;
+}
+
+/* ==================== 专业交易场景专用玻璃 ==================== */
+
+/* 交易表单专用 - 增强版 */
+.river-glass-trading {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.25) 0%,
+    rgba(0, 255, 136, 0.15) 30%,
+    rgba(15, 23, 42, 0.35) 70%,
+    rgba(6, 182, 212, 0.2) 100%
+  );
+  backdrop-filter: var(--glass-blur-intense);
+  -webkit-backdrop-filter: var(--glass-blur-intense);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    0 12px 40px rgba(6, 182, 212, 0.2),
+    0 6px 20px rgba(0, 255, 136, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(6, 182, 212, 0.2);
+}
+
+/* 订单簿专用 */
+.river-glass-orderbook {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: var(--glass-blur-medium);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  
+  /* 专业数据展示优化 */
+  font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+}
+
+/* 图表容器专用 - 增强版 */
+.river-glass-chart {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.6) 0%,
+    rgba(6, 182, 212, 0.12) 50%,
+    rgba(15, 23, 42, 0.7) 100%
+  );
+  backdrop-filter: var(--glass-blur-medium);
+  -webkit-backdrop-filter: var(--glass-blur-medium);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(6, 182, 212, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  /* 确保图表清晰度 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* AI助手专用 */
+.river-glass-ai {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.2) 0%,
+    rgba(0, 255, 136, 0.12) 30%,
+    rgba(34, 211, 238, 0.15) 70%,
+    rgba(15, 23, 42, 0.3) 100%
+  );
+  backdrop-filter: var(--glass-blur-intense);
+  border: 1px solid var(--river-glow);
+  border-opacity: 0.4;
+  
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    0 8px 32px rgba(34, 211, 238, 0.15),
+    0 0 40px rgba(6, 182, 212, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== Bento Grid 系统 ==================== */
+
+/* Bento 网格容器 */
+.river-bento-grid {
+  display: grid;
+  gap: 1px; /* 极细间隙，营造整体感 */
+  background: linear-gradient(45deg, var(--river-bed), var(--river-depth));
+  padding: 1px;
+  border-radius: 18px; /* 比卡片稍大的圆角 */
+}
+
+/* 桌面端12列网格 */
+.river-bento-12 {
+  grid-template-columns: repeat(12, 1fr);
+  min-height: 600px;
+}
+
+/* 平板端8列网格 */
+.river-bento-8 {
+  grid-template-columns: repeat(8, 1fr);
+  min-height: 500px;
+}
+
+/* 移动端4列网格 */
+.river-bento-4 {
+  grid-template-columns: repeat(4, 1fr);
+  min-height: 400px;
+}
+
+/* ==================== Bento 卡片尺寸系统 ==================== */
+
+/* Nano 卡片 - 1×1 快速操作 */
+.bento-nano {
+  grid-column: span 1;
+  grid-row: span 1;
+  min-height: 80px;
+}
+
+/* Small 卡片 - 2×1 指标显示 */
+.bento-small {
+  grid-column: span 2;
+  grid-row: span 1;
+  min-height: 120px;
+}
+
+/* Medium 卡片 - 2×2 标准功能 */
+.bento-medium {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 240px;
+}
+
+/* Large 卡片 - 3×2 重要功能 */
+.bento-large {
+  grid-column: span 3;
+  grid-row: span 2;
+  min-height: 240px;
+}
+
+/* XLarge 卡片 - 4×3 主要内容 */
+.bento-xlarge {
+  grid-column: span 4;
+  grid-row: span 3;
+  min-height: 360px;
+}
+
+/* Wide 卡片 - 6×1 横向展示 */
+.bento-wide {
+  grid-column: span 6;
+  grid-row: span 1;
+  min-height: 120px;
+}
+
+/* Full 卡片 - 12×1 完整宽度 */
+.bento-full {
+  grid-column: span 12;
+  grid-row: span 1;
+  min-height: 120px;
+}
+
+/* ==================== 专业交易布局尺寸 ==================== */
+
+/* Hero 卡片 - 7×4 主图表区域，占据58%宽度 */
+.bento-hero {
+  grid-column: span 7;
+  grid-row: span 4;
+  min-height: 480px;
+}
+
+/* Compact 卡片 - 2×4 紧凑交易表单 */
+.bento-compact {
+  grid-column: span 2;
+  grid-row: span 4;
+  min-height: 480px;
+}
+
+/* Sidebar 卡片 - 3×4 统一右侧边栏 */
+.bento-sidebar {
+  grid-column: span 3;
+  grid-row: span 4;
+  min-height: 480px;
+}
+
+/* ==================== 交互效果增强 ==================== */
+
+/* 河流波纹效果 */
+.river-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.river-ripple::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.3),
+    rgba(34, 211, 238, 0.2),
+    transparent
+  );
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.river-ripple:hover::after {
+  left: 100%;
+}
+
+/* 交互式玻璃增强 */
+.river-glass-interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.river-glass-interactive:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--river-glow);
+  border-opacity: 0.6;
+  
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.25),
+    0 12px 40px rgba(6, 182, 212, 0.2),
+    0 6px 20px rgba(34, 211, 238, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.river-glass-interactive:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* ==================== 发光效果系统 ==================== */
+
+/* 河流发光 */
+.river-glow {
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(6, 182, 212, 0.25),
+    0 0 48px rgba(34, 211, 238, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* 盈利发光 */
+.river-glow-profit {
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(0, 255, 136, 0.25),
+    0 0 48px rgba(0, 255, 136, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* 亏损发光 */
+.river-glow-loss {
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(255, 0, 85, 0.25),
+    0 0 48px rgba(255, 0, 85, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* ==================== 河流动画系统 ==================== */
+
+/* 河流流动动画 */
+@keyframes riverFlow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    opacity: 0.8;
+  }
+  25% { 
+    background-position: 25% 75%; 
+    opacity: 1;
+  }
+  50% { 
+    background-position: 100% 50%; 
+    opacity: 0.9;
+  }
+  75% { 
+    background-position: 75% 25%; 
+    opacity: 1;
+  }
+}
+
+/* 河流波纹动画 */
+@keyframes riverRipple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* 河流泡沫动画 */
+@keyframes riverBubbles {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* 发光脉冲动画 */
+@keyframes riverPulse {
+  0%, 100% {
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.15),
+      0 8px 24px rgba(6, 182, 212, 0.2),
+      0 0 48px rgba(34, 211, 238, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.2),
+      0 12px 32px rgba(6, 182, 212, 0.3),
+      0 0 60px rgba(34, 211, 238, 0.2);
+  }
+}
+
+/* ==================== 响应式适配 ==================== */
+@media (max-width: 1024px) {
+  .river-bento-12 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  
+  .bento-xlarge {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+  
+  .bento-large {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+  
+  /* 平板端专业交易布局调整 */
+  .bento-hero {
+    grid-column: span 5;
+    grid-row: span 3;
+    min-height: 360px;
+  }
+  
+  .bento-compact {
+    grid-column: span 3;
+    grid-row: span 2;
+    min-height: 240px;
+  }
+  
+  .bento-sidebar {
+    grid-column: span 8;
+    grid-row: span 2;
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .river-bento-12,
+  .river-bento-8 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .bento-xlarge,
+  .bento-large {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+  
+  .bento-medium {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  .bento-wide,
+  .bento-full {
+    grid-column: span 4;
+  }
+  
+  /* 移动端专业交易布局调整 */
+  .bento-hero,
+  .bento-sidebar,
+  .bento-compact {
+    grid-column: span 4;
+    grid-row: span 2;
+    min-height: 240px;
+  }
+  
+  /* 移动端性能优化 */
+  .river-glass-ultra,
+  .river-glass-intense {
+    backdrop-filter: var(--glass-blur-medium);
+    -webkit-backdrop-filter: var(--glass-blur-medium);
+  }
+  
+  .river-glass-interactive:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+/* ==================== 可访问性支持 ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .river-glass-interactive {
+    transition: none;
+  }
+  
+  .river-glass-interactive:hover {
+    transform: none;
+  }
+  
+  .river-ripple::after {
+    animation: none;
+    transition: none;
+  }
+  
+  .river-glass-ultra {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .river-glass-base,
+  .river-glass-subtle,
+  .river-glass-medium,
+  .river-glass-intense {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid currentColor;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .river-glass-base::before {
+    display: none;
+  }
+}
+
+/* ==================== 专业级玻璃滚动条系统 ==================== */
+
+/* 自定义滚动条 - iOS风格玻璃效果 */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 182, 212, 0.4) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(6, 182, 212, 0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.6) 0%,
+    rgba(34, 211, 238, 0.4) 50%,
+    rgba(6, 182, 212, 0.6) 100%
+  );
+  border-radius: 8px;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  backdrop-filter: blur(16px);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 16px rgba(6, 182, 212, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.8) 0%,
+    rgba(34, 211, 238, 0.6) 50%,
+    rgba(6, 182, 212, 0.8) 100%
+  );
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 0 24px rgba(6, 182, 212, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(6, 182, 212, 0.9);
+  transform: scale(0.95);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* 超细滚动条变体 - 用于数据密集区域 */
+.custom-scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
+}
+
+.custom-scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.1);
+  border-radius: 4px;
+}
+
+.custom-scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.5);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.custom-scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.7);
+}
+
+/* 隐藏滚动条但保持功能 */
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==================== 品牌特色类 ==================== */
+
+/* RiverBit Logo容器专用 */
+.river-logo-container {
+  background: linear-gradient(
+    135deg,
+    rgba(6, 182, 212, 0.2) 0%,
+    rgba(34, 211, 238, 0.15) 50%,
+    rgba(103, 232, 249, 0.1) 100%
+  );
+  backdrop-filter: var(--glass-blur-medium);
+  border: 1px solid var(--river-surface);
+  border-opacity: 0.3;
+  animation: riverPulse 4s ease-in-out infinite;
+}
+
+/* 河流主题按钮 */
+.river-button {
+  background: var(--river-gradient-flow);
+  background-size: 200% 200%;
+  border: 1px solid var(--river-surface);
+  border-opacity: 0.4;
+  backdrop-filter: var(--glass-blur-subtle);
+  transition: all 0.3s ease;
+  animation: riverFlow 3s linear infinite;
+}
+
+.river-button:hover {
+  background-size: 150% 150%;
+  border-opacity: 0.8;
+  box-shadow: 
+    0 12px 40px rgba(6, 182, 212, 0.25),
+    0 0 30px rgba(34, 211, 238, 0.2);
+}
+
+/* 数据变化动画 */
+.river-data-positive {
+  color: var(--river-profit);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  animation: riverBubbles 1s ease-out;
+}
+
+.river-data-negative {
+  color: var(--river-loss);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.3);
+  animation: riverBubbles 1s ease-out;
+}

@@ -1,0 +1,486 @@
+/* Elite Trading Interface Styles */
+/* Enhanced professional trading design system */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* ==================== Elite Color System ==================== */
+:root {
+  /* Elite Dark Theme - Professional Trading */
+  --elite-bg-primary: #0f172a;
+  --elite-bg-secondary: #1e293b;
+  --elite-bg-tertiary: #334155;
+  --elite-bg-surface: #475569;
+  
+  /* Elite Glass Effects */
+  --elite-glass-primary: rgba(15, 23, 42, 0.8);
+  --elite-glass-secondary: rgba(30, 41, 59, 0.7);
+  --elite-glass-overlay: rgba(51, 65, 85, 0.3);
+  
+  /* Elite Accent Colors */
+  --elite-cyan: #06b6d4;
+  --elite-cyan-light: #22d3ee;
+  --elite-cyan-dark: #0891b2;
+  
+  --elite-blue: #3b82f6;
+  --elite-blue-light: #60a5fa;
+  --elite-blue-dark: #2563eb;
+  
+  /* Trading Specific Colors */
+  --elite-profit: #10b981;
+  --elite-profit-light: #34d399;
+  --elite-profit-dark: #059669;
+  
+  --elite-loss: #ef4444;
+  --elite-loss-light: #f87171;
+  --elite-loss-dark: #dc2626;
+  
+  --elite-warning: #f59e0b;
+  --elite-warning-light: #fbbf24;
+  --elite-warning-dark: #d97706;
+  
+  /* Elite Text Colors */
+  --elite-text-primary: #f8fafc;
+  --elite-text-secondary: #e2e8f0;
+  --elite-text-muted: #94a3b8;
+  --elite-text-disabled: #64748b;
+  
+  /* Elite Border Colors */
+  --elite-border-primary: #334155;
+  --elite-border-secondary: #475569;
+  --elite-border-accent: #06b6d4;
+  --elite-border-subtle: rgba(51, 65, 85, 0.3);
+}
+
+/* ==================== Elite Glass Morphism System ==================== */
+.liquid-glass-elite {
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.9) 0%, 
+    rgba(30, 41, 59, 0.8) 50%, 
+    rgba(51, 65, 85, 0.7) 100%);
+  backdrop-filter: blur(24px) saturate(1.4) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4) brightness(1.1);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(6, 182, 212, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-trading {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(32px) saturate(1.6) brightness(1.15);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6) brightness(1.15);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(6, 182, 212, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* ==================== Elite Animation System ==================== */
+@keyframes eliteGlow {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(6, 182, 212, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(6, 182, 212, 0.4);
+  }
+}
+
+@keyframes elitePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes eliteSlide {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes eliteFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.elite-glow {
+  animation: eliteGlow 3s ease-in-out infinite;
+}
+
+.elite-pulse {
+  animation: elitePulse 2s ease-in-out infinite;
+}
+
+.elite-slide {
+  animation: eliteSlide 0.5s ease-out;
+}
+
+.elite-float {
+  animation: eliteFloat 3s ease-in-out infinite;
+}
+
+/* ==================== Elite Button System ==================== */
+.elite-button-primary {
+  background: linear-gradient(135deg, var(--elite-cyan) 0%, var(--elite-blue) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: white;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.elite-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(6, 182, 212, 0.25),
+    0 4px 12px rgba(59, 130, 246, 0.15);
+  border-color: rgba(6, 182, 212, 0.5);
+}
+
+.elite-button-primary:active {
+  transform: translateY(-1px);
+  transition-duration: 0.1s;
+}
+
+.elite-button-success {
+  background: linear-gradient(135deg, var(--elite-profit) 0%, var(--elite-profit-dark) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.elite-button-danger {
+  background: linear-gradient(135deg, var(--elite-loss) 0%, var(--elite-loss-dark) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Elite Button Ripple Effect */
+.elite-button-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.elite-button-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transition: width 0.8s ease, height 0.8s ease, opacity 0.8s ease;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.elite-button-ripple:active::before {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+  transition-duration: 0.2s;
+}
+
+/* ==================== Elite Data Display ==================== */
+.elite-price-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.025em;
+  font-weight: 700;
+}
+
+.elite-price-up {
+  color: var(--elite-profit);
+  animation: elitePriceUp 0.6s ease-out;
+}
+
+.elite-price-down {
+  color: var(--elite-loss);
+  animation: elitePriceDown 0.6s ease-out;
+}
+
+@keyframes elitePriceUp {
+  0% { 
+    background-color: rgba(16, 185, 129, 0.2);
+    transform: scale(1);
+  }
+  50% { 
+    background-color: rgba(16, 185, 129, 0.3);
+    transform: scale(1.02);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+@keyframes elitePriceDown {
+  0% { 
+    background-color: rgba(239, 68, 68, 0.2);
+    transform: scale(1);
+  }
+  50% { 
+    background-color: rgba(239, 68, 68, 0.3);
+    transform: scale(1.02);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+/* ==================== Elite Order Book Styles ==================== */
+.elite-orderbook-entry {
+  position: relative;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.elite-orderbook-entry:hover {
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateX(2px);
+}
+
+.elite-orderbook-bid {
+  border-left: 2px solid transparent;
+}
+
+.elite-orderbook-bid:hover {
+  border-left-color: var(--elite-profit);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.elite-orderbook-ask {
+  border-left: 2px solid transparent;
+}
+
+.elite-orderbook-ask:hover {
+  border-left-color: var(--elite-loss);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Order Book Depth Visualization */
+.elite-depth-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 0.5rem;
+  transition: width 0.3s ease;
+  z-index: 1;
+}
+
+.elite-depth-bar.bid {
+  background: linear-gradient(90deg, 
+    rgba(16, 185, 129, 0.15) 0%, 
+    rgba(16, 185, 129, 0.05) 100%);
+}
+
+.elite-depth-bar.ask {
+  background: linear-gradient(90deg, 
+    rgba(239, 68, 68, 0.15) 0%, 
+    rgba(239, 68, 68, 0.05) 100%);
+}
+
+/* ==================== Elite Layout System ==================== */
+.elite-grid-trading {
+  display: grid;
+  grid-template-columns: 300px 1fr 360px;
+  gap: 0;
+  height: 100vh;
+}
+
+@media (max-width: 1536px) {
+  .elite-grid-trading {
+    grid-template-columns: 280px 1fr 320px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .elite-grid-trading {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+}
+
+/* ==================== Elite Scrollbar ==================== */
+.elite-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.elite-scroll::-webkit-scrollbar-track {
+  background: var(--elite-bg-secondary);
+  border-radius: 3px;
+}
+
+.elite-scroll::-webkit-scrollbar-thumb {
+  background: var(--elite-border-secondary);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.elite-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--elite-border-accent);
+}
+
+/* ==================== Elite Status Indicators ==================== */
+.elite-status-online {
+  background: radial-gradient(circle, var(--elite-profit), var(--elite-profit-dark));
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+  animation: elitePulse 2s infinite;
+}
+
+.elite-status-warning {
+  background: radial-gradient(circle, var(--elite-warning), var(--elite-warning-dark));
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  animation: elitePulse 2s infinite;
+}
+
+.elite-status-error {
+  background: radial-gradient(circle, var(--elite-loss), var(--elite-loss-dark));
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+  animation: elitePulse 2s infinite;
+}
+
+/* ==================== Elite Performance Optimizations ==================== */
+.elite-gpu-accelerated {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  will-change: transform, opacity, filter;
+}
+
+.elite-smooth-transform {
+  transform: translateZ(0);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.elite-smooth-transform:hover {
+  transform: translateZ(0) translateY(-2px) scale(1.01);
+}
+
+/* ==================== Elite Responsive Breakpoints ==================== */
+@media (max-width: 768px) {
+  .elite-mobile-stack {
+    flex-direction: column !important;
+  }
+  
+  .elite-mobile-hidden {
+    display: none !important;
+  }
+  
+  .elite-mobile-compact {
+    padding: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* ==================== Elite Accessibility ==================== */
+@media (prefers-reduced-motion: reduce) {
+  .elite-glow,
+  .elite-pulse,
+  .elite-slide,
+  .elite-float {
+    animation: none;
+  }
+  
+  .elite-smooth-transform {
+    transition: none;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.elite-focus-visible:focus-visible {
+  outline: 2px solid var(--elite-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
+}
+
+/* ==================== Elite Theme Utilities ==================== */
+.text-elite-cyan {
+  color: var(--elite-cyan);
+}
+
+.text-elite-profit {
+  color: var(--elite-profit);
+}
+
+.text-elite-loss {
+  color: var(--elite-loss);
+}
+
+.text-elite-warning {
+  color: var(--elite-warning);
+}
+
+.bg-elite-glass {
+  background: var(--elite-glass-primary);
+}
+
+.border-elite-accent {
+  border-color: var(--elite-border-accent);
+}
+
+/* ==================== Elite Loading States ==================== */
+.elite-skeleton {
+  background: linear-gradient(90deg, 
+    rgba(30, 41, 59, 0.8) 0%, 
+    rgba(51, 65, 85, 0.9) 50%, 
+    rgba(30, 41, 59, 0.8) 100%);
+  background-size: 200% 100%;
+  animation: eliteSkeleton 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes eliteSkeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ==================== Elite Tooltips ==================== */
+.elite-tooltip {
+  background: var(--elite-glass-primary);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--elite-border-accent);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--elite-text-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}

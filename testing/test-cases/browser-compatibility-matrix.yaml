@@ -1,0 +1,283 @@
+# RiverBit Demo浏览器兼容性测试矩阵
+
+version: "1.0.0"
+updated: "2025-08-15"
+scope: "投资人演示环境兼容性"
+
+# 测试矩阵定义
+compatibility_matrix:
+  desktop_browsers:
+    chrome:
+      versions: ["最新版本", "前1个版本", "前2个版本"]
+      priority: "P0"
+      market_share: "65%"
+      test_scenarios:
+        - wallet_connection
+        - trading_interface
+        - real_time_data
+        - responsive_design
+      
+    firefox:
+      versions: ["最新版本", "前1个版本"]
+      priority: "P1"
+      market_share: "8%"
+      test_scenarios:
+        - basic_functionality
+        - wallet_connection
+        - trading_interface
+      
+    safari:
+      versions: ["最新版本", "前1个版本"]
+      priority: "P1"
+      market_share: "18%"
+      test_scenarios:
+        - basic_functionality
+        - wallet_connection
+        - css_compatibility
+      
+    edge:
+      versions: ["最新版本"]
+      priority: "P2"
+      market_share: "4%"
+      test_scenarios:
+        - basic_functionality
+        - wallet_connection
+
+  mobile_browsers:
+    ios_safari:
+      versions: ["iOS 15+", "iOS 16+", "iOS 17+"]
+      priority: "P1"
+      devices: ["iPhone 12", "iPhone 13", "iPhone 14", "iPhone 15"]
+      test_scenarios:
+        - mobile_layout
+        - touch_interactions
+        - wallet_mobile_support
+        - performance_mobile
+    
+    chrome_mobile:
+      versions: ["Android 10+", "Android 11+", "Android 12+"]
+      priority: "P1"
+      devices: ["Galaxy S20", "Pixel 6", "OnePlus 9"]
+      test_scenarios:
+        - mobile_layout
+        - touch_interactions
+        - wallet_mobile_support
+    
+    samsung_internet:
+      versions: ["最新版本"]
+      priority: "P2"
+      devices: ["Galaxy S20", "Galaxy Note 20"]
+      test_scenarios:
+        - basic_functionality
+        - mobile_layout
+
+# 具体测试用例
+test_cases:
+  wallet_connection:
+    id: "BC_WALLET_001"
+    name: "跨浏览器钱包连接兼容性"
+    priority: "P0"
+    description: "验证MetaMask等钱包在不同浏览器中的连接功能"
+    test_steps:
+      - step: "安装MetaMask扩展"
+        chrome: "✅ 原生支持"
+        firefox: "✅ 原生支持"
+        safari: "⚠️ 需要特殊配置"
+        edge: "✅ 原生支持"
+      - step: "打开demo页面"
+        expected: "页面正常加载，无控制台错误"
+      - step: "点击连接钱包"
+        expected: "钱包选择弹窗正常显示"
+      - step: "选择MetaMask"
+        expected: "MetaMask授权窗口弹出"
+      - step: "完成授权"
+        expected: "连接状态正确显示，地址格式正确"
+    success_criteria:
+      - "连接成功率 100%"
+      - "连接时间 < 10秒"
+      - "状态同步正确"
+    known_issues:
+      safari: "可能需要手动允许弹窗"
+      firefox: "某些版本可能有扩展兼容性问题"
+
+  trading_interface:
+    id: "BC_TRADE_001"
+    name: "交易界面跨浏览器渲染"
+    priority: "P0"
+    description: "验证交易界面在不同浏览器中的显示和功能"
+    test_steps:
+      - step: "加载交易页面"
+        expected: "布局正确，无元素重叠"
+      - step: "测试交易对选择"
+        expected: "下拉菜单正常工作"
+      - step: "输入交易金额"
+        expected: "数字输入框正常响应"
+      - step: "调整杠杆设置"
+        expected: "滑块或按钮正常工作"
+      - step: "提交交易"
+        expected: "表单验证和提交正常"
+    browser_specific_checks:
+      chrome:
+        - "CSS Grid布局正确"
+        - "Web3集成无问题"
+        - "动画效果流畅"
+      firefox:
+        - "Flexbox兼容性"
+        - "字体渲染正确"
+        - "事件处理正常"
+      safari:
+        - "WebKit特定样式"
+        - "iOS触摸事件"
+        - "视口配置正确"
+
+  real_time_data:
+    id: "BC_DATA_001"
+    name: "实时数据更新兼容性"
+    priority: "P0"
+    description: "验证实时价格和订单薄数据在不同浏览器中的更新"
+    test_steps:
+      - step: "观察价格数据更新"
+        expected: "价格定期更新，动画正常"
+      - step: "检查订单薄变化"
+        expected: "订单薄数据实时刷新"
+      - step: "验证WebSocket连接"
+        expected: "连接稳定，无频繁重连"
+      - step: "测试网络中断恢复"
+        expected: "自动重连，数据恢复"
+    performance_requirements:
+      chrome: "更新频率 1-2秒"
+      firefox: "更新频率 1-3秒"
+      safari: "更新频率 2-3秒"
+      edge: "更新频率 1-3秒"
+
+  responsive_design:
+    id: "BC_RESPONSIVE_001"
+    name: "响应式设计跨设备兼容"
+    priority: "P1"
+    description: "验证界面在不同屏幕尺寸和设备上的适配"
+    viewport_tests:
+      mobile_portrait:
+        size: "375x667"
+        tests:
+          - "导航菜单适配"
+          - "交易表单布局"
+          - "按钮尺寸适当"
+          - "文字大小可读"
+      mobile_landscape:
+        size: "667x375" 
+        tests:
+          - "横屏布局合理"
+          - "功能区域可访问"
+          - "无横向滚动"
+      tablet:
+        size: "768x1024"
+        tests:
+          - "中等屏幕适配"
+          - "触控交互友好"
+          - "内容密度合适"
+      desktop:
+        size: "1920x1080"
+        tests:
+          - "大屏幕布局充分利用"
+          - "鼠标交互精确"
+          - "快捷键支持"
+
+# 自动化测试配置
+automation_config:
+  playwright_setup:
+    browsers: ["chromium", "firefox", "webkit"]
+    headless: false
+    viewport_sizes:
+      - { width: 375, height: 667 }   # iPhone SE
+      - { width: 390, height: 844 }   # iPhone 12
+      - { width: 768, height: 1024 }  # iPad
+      - { width: 1920, height: 1080 } # Desktop
+    
+  test_data:
+    demo_url: "http://localhost:5173"
+    test_timeout: 30000
+    retry_attempts: 2
+    screenshot_on_failure: true
+
+# 已知问题和解决方案
+known_issues:
+  safari_webkit:
+    issue: "某些CSS Grid特性支持不完整"
+    impact: "轻微布局差异"
+    workaround: "使用Flexbox回退方案"
+    status: "已修复"
+  
+  firefox_cors:
+    issue: "跨域请求可能被阻止"
+    impact: "数据加载失败"
+    workaround: "配置开发服务器CORS头"
+    status: "已修复"
+  
+  mobile_safari_viewport:
+    issue: "100vh高度计算包含地址栏"
+    impact: "底部内容可能被遮挡"
+    workaround: "使用JavaScript动态计算"
+    status: "已修复"
+
+# 测试执行计划
+execution_plan:
+  daily_smoke_test:
+    browsers: ["Chrome最新版"]
+    test_cases: ["BC_WALLET_001", "BC_TRADE_001"]
+    duration: "15分钟"
+  
+  weekly_compatibility_test:
+    browsers: ["Chrome", "Firefox", "Safari"]
+    test_cases: "全部P0和P1用例"
+    duration: "2小时"
+  
+  pre_demo_full_test:
+    browsers: "所有目标浏览器"
+    test_cases: "完整测试矩阵"
+    duration: "4小时"
+    includes:
+      - "功能兼容性"
+      - "性能基准"
+      - "视觉回归"
+      - "移动端测试"
+
+# 报告模板
+test_report_template:
+  summary:
+    total_browsers_tested: "数量"
+    compatibility_score: "百分比"
+    critical_issues: "数量"
+    performance_baseline: "通过/失败"
+  
+  detailed_results:
+    per_browser:
+      - browser_name: "浏览器名称"
+        version: "版本号"
+        test_results:
+          passed: "通过数量"
+          failed: "失败数量"
+          issues: ["问题列表"]
+  
+  recommendations:
+    immediate_fixes: ["需要立即修复的问题"]
+    optimization_opportunities: ["优化建议"]
+    future_considerations: ["未来考虑事项"]
+
+# 成功标准
+success_criteria:
+  minimum_compatibility:
+    chrome: "100% P0用例通过"
+    firefox: "95% P0用例通过" 
+    safari: "90% P0用例通过"
+    mobile: "95% P1用例通过"
+  
+  performance_benchmarks:
+    page_load: "< 5秒 (所有浏览器)"
+    interaction_response: "< 500ms"
+    memory_usage: "< 150MB"
+    cpu_usage: "< 50%"
+  
+  user_experience:
+    visual_consistency: "> 95% 相似度"
+    functional_parity: "100% 核心功能可用"
+    accessibility: "WCAG 2.1 AA级别"

@@ -1,0 +1,9 @@
+{
+  "network": "arbitrumSepolia",
+  "timestamp": "2025-08-15T01:15:49.067Z",
+  "deployer": "0x97e05F0c5426b497f4E1f40679AAaa887D7A0511",
+  "contracts": {
+    "riverbitCore": "0x43bf3e410fd22e4cD1081E60F31600BDdC15ea96",
+    "usdc": "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d"
+  }
+}

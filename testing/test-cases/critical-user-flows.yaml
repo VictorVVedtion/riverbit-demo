@@ -1,0 +1,299 @@
+# RiverBit Demo关键用户流程测试用例
+
+version: "1.0.0"
+updated: "2025-08-15"
+tester: "Demo-Functionality-Tester Agent"
+
+# P0级别 - 关键业务流程测试用例
+
+test_suites:
+  - name: "钱包连接核心流程"
+    priority: P0
+    test_cases:
+      - id: TC_WALLET_001
+        title: "MetaMask钱包连接成功验证"
+        priority: P0
+        category: "功能测试"
+        estimated_time: "3分钟"
+        preconditions:
+          - "MetaMask插件已安装并设置"
+          - "测试账户有少量ETH作为Gas费"
+          - "网络连接正常"
+        steps:
+          - action: "打开TradingPage页面"
+            expected: "页面正常加载，显示连接钱包提示"
+          - action: "点击'连接钱包'按钮"
+            expected: "钱包选择模态框弹出"
+          - action: "选择MetaMask选项"
+            expected: "MetaMask授权窗口打开"
+          - action: "在MetaMask中点击'连接'"
+            expected: "授权成功，返回到交易页面"
+          - action: "检查连接状态显示"
+            expected: "钱包地址显示，网络状态正确"
+        success_criteria:
+          - "连接过程 < 10秒完成"
+          - "钱包地址格式正确 (0x...)"
+          - "网络状态显示为Arbitrum"
+          - "连接按钮状态更新为'已连接'"
+        failure_handling:
+          - "连接失败时显示明确错误信息"
+          - "提供重试选项"
+          - "无授权时友好提示"
+
+      - id: TC_WALLET_002
+        title: "网络切换到Arbitrum验证"
+        priority: P0
+        category: "功能测试"
+        estimated_time: "2分钟"
+        preconditions:
+          - "钱包已连接但在错误网络 (如Ethereum主网)"
+          - "用户有切换网络权限"
+        steps:
+          - action: "检查当前网络状态提示"
+            expected: "显示网络不匹配警告"
+          - action: "点击'切换网络'按钮"
+            expected: "MetaMask网络切换请求弹出"
+          - action: "在MetaMask中确认切换"
+            expected: "网络成功切换到Arbitrum Sepolia"
+          - action: "验证网络状态更新"
+            expected: "警告消失，功能区域启用"
+        success_criteria:
+          - "网络切换 < 5秒完成"
+          - "网络状态实时更新"
+          - "所有交易功能可用"
+        failure_handling:
+          - "切换被拒绝时提供手动配置指导"
+          - "网络配置错误时显示正确参数"
+
+  - name: "交易执行核心流程"
+    priority: P0
+    test_cases:
+      - id: TC_TRADE_001
+        title: "BTC做多订单完整执行流程"
+        priority: P0
+        category: "功能测试"
+        estimated_time: "5分钟"
+        preconditions:
+          - "钱包已连接到Arbitrum网络"
+          - "账户余额 > 50 USDT"
+          - "BTC价格数据正常加载"
+        steps:
+          - action: "选择BTC/USDT交易对"
+            expected: "当前价格和24h变化正确显示"
+          - action: "点击'Long'按钮选择做多"
+            expected: "按钮高亮，颜色变为绿色"
+          - action: "设置杠杆为10x"
+            expected: "杠杆选择器更新，风险提示显示"
+          - action: "输入交易金额50 USDT"
+            expected: "保证金要求显示为5 USDT"
+          - action: "检查账户余额充足性"
+            expected: "无余额不足警告"
+          - action: "点击提交交易按钮"
+            expected: "MetaMask签名请求弹出"
+          - action: "在MetaMask中确认交易"
+            expected: "交易提交成功，获得交易哈希"
+          - action: "等待交易确认"
+            expected: "交易状态更新为'已确认'"
+          - action: "检查持仓列表更新"
+            expected: "新的BTC多头仓位显示"
+          - action: "验证账户余额扣除"
+            expected: "可用余额减少5 USDT"
+        success_criteria:
+          - "交易提交 < 30秒完成"
+          - "Gas费估算合理 (< 0.01 ETH)"
+          - "持仓数据准确显示"
+          - "PnL计算基准价格正确"
+        failure_handling:
+          - "余额不足时阻止交易并提示"
+          - "Gas费过高时警告用户"
+          - "网络拥堵时提供重试选项"
+          - "交易失败时回滚状态"
+
+      - id: TC_TRADE_002
+        title: "持仓平仓流程验证"
+        priority: P0
+        category: "功能测试"
+        estimated_time: "3分钟"
+        preconditions:
+          - "已有一个或多个开仓位"
+          - "钱包连接正常"
+          - "网络状态稳定"
+        steps:
+          - action: "在持仓列表中选择要平仓的仓位"
+            expected: "仓位详情正确显示 (方向、数量、PnL)"
+          - action: "点击'平仓'按钮"
+            expected: "平仓确认对话框弹出"
+          - action: "确认平仓操作"
+            expected: "MetaMask签名请求弹出"
+          - action: "在MetaMask中确认交易"
+            expected: "平仓交易提交成功"
+          - action: "等待交易确认"
+            expected: "交易状态更新，仓位从列表移除"
+          - action: "检查账户余额更新"
+            expected: "保证金释放，PnL结算到余额"
+        success_criteria:
+          - "平仓执行 < 20秒完成"
+          - "PnL计算准确"
+          - "保证金正确释放"
+          - "交易记录正确保存"
+
+  - name: "实时数据同步验证"
+    priority: P0
+    test_cases:
+      - id: TC_DATA_001
+        title: "价格数据实时更新验证"
+        priority: P0
+        category: "功能测试"
+        estimated_time: "3分钟"
+        preconditions:
+          - "页面已加载完成"
+          - "网络连接稳定"
+          - "价格数据源可访问"
+        steps:
+          - action: "观察BTC价格显示区域"
+            expected: "显示当前价格和数据源标识"
+          - action: "等待30秒观察价格变化"
+            expected: "价格数据至少更新1次"
+          - action: "检查价格变化动画效果"
+            expected: "上涨绿色，下跌红色闪烁"
+          - action: "切换到ETH交易对"
+            expected: "价格数据立即切换到ETH"
+          - action: "检查数据源标识"
+            expected: "显示数据来源 (CoinGecko/Yahoo等)"
+        success_criteria:
+          - "价格更新频率 1-5秒"
+          - "数据源切换 < 2秒"
+          - "价格变化视觉反馈明确"
+          - "多个交易对数据并行更新"
+
+      - id: TC_DATA_002
+        title: "订单薄动态更新测试"
+        priority: P0
+        category: "功能测试"
+        estimated_time: "4分钟"
+        preconditions:
+          - "订单薄组件已加载"
+          - "市场数据模拟正常运行"
+        steps:
+          - action: "观察订单薄买卖单列表"
+            expected: "买单(绿色)和卖单(红色)正确显示"
+          - action: "等待10秒观察动态更新"
+            expected: "订单数量和价格有变化"
+          - action: "检查新订单高亮效果"
+            expected: "新增订单有闪烁动画"
+          - action: "验证价差计算"
+            expected: "买一卖一价差合理显示"
+          - action: "检查深度图显示"
+            expected: "累计数量的深度条正确渲染"
+          - action: "测试暂停/启动功能"
+            expected: "点击暂停后更新停止"
+        success_criteria:
+          - "更新频率 1-3秒"
+          - "动画效果流畅"
+          - "数据计算准确"
+          - "用户交互响应及时"
+
+  - name: "响应式设计验证"
+    priority: P1
+    test_cases:
+      - id: TC_RESPONSIVE_001
+        title: "移动端交易界面适配验证"
+        priority: P1
+        category: "兼容性测试"
+        estimated_time: "5分钟"
+        device_sizes:
+          - "iPhone SE: 375x667"
+          - "iPhone 12: 390x844"
+          - "Galaxy S20: 360x800"
+          - "iPad: 768x1024"
+        steps:
+          - action: "在移动端打开交易页面"
+            expected: "页面布局自适应屏幕尺寸"
+          - action: "检查交易表单可用性"
+            expected: "所有输入框和按钮可正常操作"
+          - action: "测试滑动和触控交互"
+            expected: "订单薄和图表可正常滑动"
+          - action: "验证模态框和弹窗适配"
+            expected: "钱包连接弹窗不超出屏幕"
+          - action: "测试横屏模式适配"
+            expected: "横屏时布局合理调整"
+        success_criteria:
+          - "所有功能在移动端可用"
+          - "文字大小易于阅读"
+          - "按钮尺寸适合触控"
+          - "无横向滚动条"
+
+# 测试数据和配置
+
+test_data:
+  accounts:
+    - name: "测试账户1"
+      address: "0x742d35Cc6634C0532925a3b8D23D2CE978C7D2eF"
+      balance: "1000 USDT"
+      network: "Arbitrum Sepolia"
+    - name: "测试账户2"  
+      address: "0x123d35Cc6634C0532925a3b8D23D2CE978C7D2eF"
+      balance: "500 USDT"
+      network: "Arbitrum Sepolia"
+
+  trading_pairs:
+    - symbol: "BTC/USDT"
+      current_price: 43250.00
+      change_24h: 2.45
+      min_trade_amount: 10
+    - symbol: "ETH/USDT"
+      current_price: 2680.50
+      change_24h: -1.23
+      min_trade_amount: 10
+    - symbol: "SOL/USDT"
+      current_price: 98.75
+      change_24h: 5.67
+      min_trade_amount: 10
+
+  test_scenarios:
+    successful_trade:
+      amount: 100
+      leverage: 10
+      side: "long"
+      expected_margin: 10
+    
+    insufficient_balance:
+      amount: 2000
+      leverage: 10
+      side: "long"
+      expected_error: "余额不足"
+    
+    network_error:
+      description: "模拟网络中断恢复"
+      duration: "10秒"
+      expected_recovery: "自动重连"
+
+# 执行计划
+
+execution_schedule:
+  daily_smoke_test:
+    - TC_WALLET_001
+    - TC_TRADE_001
+    - TC_DATA_001
+    
+  pre_demo_full_test:
+    - "执行所有P0用例"
+    - "执行关键P1用例"
+    - "跨浏览器兼容性验证"
+    - "性能基准测试"
+    
+  regression_test:
+    frequency: "每次代码变更后"
+    scope: "所有相关功能模块"
+    automation_level: "50%"
+
+# 成功标准
+
+success_metrics:
+  functional_completeness: ">= 100% P0用例通过"
+  performance_benchmark:
+    page_load: "< 3秒"
+    wallet_connection: "< 5秒" 
+    trade_execution: "< 30秒"
+  compatibility_coverage: ">= 95%主流设备"
+  user_experience_score: ">= 4.5/5.0"

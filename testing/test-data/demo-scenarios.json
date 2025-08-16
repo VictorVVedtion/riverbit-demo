@@ -1,0 +1,294 @@
+{
+  "demo_scenarios": {
+    "metadata": {
+      "version": "1.0.0",
+      "updated": "2025-08-15",
+      "description": "RiverBit Demo演示场景数据配置"
+    },
+
+    "investor_demo_flows": {
+      "quick_demo": {
+        "name": "5分钟快速演示",
+        "duration": "5分钟",
+        "target_audience": "忙碌的投资人",
+        "key_points": [
+          "钱包连接的便捷性",
+          "交易界面的专业性",
+          "实时数据的可靠性",
+          "移动端的完整体验"
+        ],
+        "script": [
+          {
+            "step": 1,
+            "action": "打开demo页面",
+            "talking_points": "这是我们的RiverBit DeFi交易平台，专为机构和高净值用户设计",
+            "demo_actions": ["展示整体界面布局", "指出核心功能区域"],
+            "time_allocation": "30秒"
+          },
+          {
+            "step": 2, 
+            "action": "连接钱包演示",
+            "talking_points": "我们支持所有主流钱包，连接过程简单安全",
+            "demo_actions": ["点击连接钱包", "选择MetaMask", "完成授权"],
+            "time_allocation": "45秒"
+          },
+          {
+            "step": 3,
+            "action": "交易功能展示",
+            "talking_points": "支持BTC、ETH等主流加密货币，以及苹果、特斯拉等股票交易",
+            "demo_actions": ["切换交易对", "设置杠杆", "展示风险控制"],
+            "time_allocation": "90秒"
+          },
+          {
+            "step": 4,
+            "action": "实时数据展示",
+            "talking_points": "我们整合了多个数据源，确保价格的准确性和实时性",
+            "demo_actions": ["展示价格更新", "订单薄变化", "图表功能"],
+            "time_allocation": "60秒"
+          },
+          {
+            "step": 5,
+            "action": "移动端体验",
+            "talking_points": "完全响应式设计，移动端体验与桌面端一致",
+            "demo_actions": ["切换到移动端视图", "测试触控操作"],
+            "time_allocation": "45秒"
+          },
+          {
+            "step": 6,
+            "action": "总结和Q&A",
+            "talking_points": "技术架构稳定，用户体验优秀，已准备好规模化部署",
+            "demo_actions": ["回顾核心优势", "回答技术问题"],
+            "time_allocation": "60秒"
+          }
+        ]
+      },
+
+      "detailed_demo": {
+        "name": "15分钟详细演示",
+        "duration": "15分钟",
+        "target_audience": "技术背景投资人",
+        "key_points": [
+          "技术架构的先进性",
+          "智能合约的安全性", 
+          "用户体验的完整性",
+          "商业模式的可行性"
+        ],
+        "script": [
+          {
+            "step": 1,
+            "action": "产品概述",
+            "talking_points": "RiverBit是下一代DeFi交易平台，结合了传统金融的严谨性和DeFi的创新性",
+            "demo_actions": ["产品定位介绍", "市场机遇分析"],
+            "time_allocation": "2分钟"
+          },
+          {
+            "step": 2,
+            "action": "技术架构深度展示",
+            "talking_points": "基于Arbitrum的Layer2解决方案，低成本高效率",
+            "demo_actions": ["智能合约架构", "安全机制说明", "Gas费优化"],
+            "time_allocation": "3分钟"
+          },
+          {
+            "step": 3,
+            "action": "完整交易流程演示",
+            "talking_points": "从钱包连接到交易执行的完整用户旅程",
+            "demo_actions": ["钱包连接", "资产选择", "风险管理", "订单执行", "持仓管理"],
+            "time_allocation": "4分钟"
+          },
+          {
+            "step": 4,
+            "action": "数据和图表系统",
+            "talking_points": "企业级数据聚合，多源验证确保准确性",
+            "demo_actions": ["TradingView集成", "实时数据流", "备用数据源"],
+            "time_allocation": "2分钟"
+          },
+          {
+            "step": 5,
+            "action": "用户体验细节",
+            "talking_points": "专业交易员的使用习惯，移动端的完整功能",
+            "demo_actions": ["响应式设计", "快捷键支持", "错误处理"],
+            "time_allocation": "2分钟"
+          },
+          {
+            "step": 6,
+            "action": "商业模式和未来规划",
+            "talking_points": "清晰的盈利模式，可扩展的技术架构",
+            "demo_actions": ["收入来源分析", "技术路线图", "市场拓展计划"],
+            "time_allocation": "2分钟"
+          }
+        ]
+      }
+    },
+
+    "test_accounts": {
+      "demo_account_1": {
+        "address": "0x742d35Cc6634C0532925a3b8D23D2CE978C7D2eF",
+        "balance_usdt": 10000,
+        "balance_eth": 2.5,
+        "network": "Arbitrum Sepolia",
+        "purpose": "主要演示账户，用于完整交易流程展示",
+        "preset_positions": [
+          {
+            "symbol": "BTC/USDT",
+            "side": "long",
+            "size": 0.1,
+            "entry_price": 43000,
+            "leverage": 10,
+            "pnl": 250.5
+          }
+        ]
+      },
+      "demo_account_2": {
+        "address": "0x123d35Cc6634C0532925a3b8D23D2CE978C7D2eF", 
+        "balance_usdt": 5000,
+        "balance_eth": 1.0,
+        "network": "Arbitrum Sepolia",
+        "purpose": "备用演示账户，用于展示不同用户状态",
+        "preset_positions": []
+      }
+    },
+
+    "market_data_simulation": {
+      "btc_usdt": {
+        "base_price": 43250.00,
+        "volatility": 0.02,
+        "trend": "sideways",
+        "update_frequency": "2s",
+        "price_range": {
+          "min": 42000,
+          "max": 44500
+        }
+      },
+      "eth_usdt": {
+        "base_price": 2680.50,
+        "volatility": 0.025,
+        "trend": "bullish",
+        "update_frequency": "2s",
+        "price_range": {
+          "min": 2600,
+          "max": 2750
+        }
+      },
+      "sol_usdt": {
+        "base_price": 98.75,
+        "volatility": 0.03,
+        "trend": "bearish", 
+        "update_frequency": "2s",
+        "price_range": {
+          "min": 95,
+          "max": 102
+        }
+      },
+      "xAAPL": {
+        "base_price": 185.25,
+        "volatility": 0.015,
+        "trend": "sideways",
+        "update_frequency": "5s",
+        "price_range": {
+          "min": 180,
+          "max": 190
+        }
+      }
+    },
+
+    "demo_risks_and_mitigation": {
+      "potential_issues": [
+        {
+          "risk": "网络连接问题",
+          "probability": "medium",
+          "impact": "high",
+          "mitigation": [
+            "准备移动热点备用网络",
+            "提前测试演示场地网络",
+            "准备离线演示版本"
+          ]
+        },
+        {
+          "risk": "钱包连接失败",
+          "probability": "low",
+          "impact": "high", 
+          "mitigation": [
+            "提前安装和配置MetaMask",
+            "准备多个测试账户",
+            "有模拟连接状态的演示版本"
+          ]
+        },
+        {
+          "risk": "第三方API不可用",
+          "probability": "medium",
+          "impact": "medium",
+          "mitigation": [
+            "实现多个数据源备份",
+            "本地缓存关键数据",
+            "备用图表方案"
+          ]
+        },
+        {
+          "risk": "浏览器兼容性问题",
+          "probability": "low",
+          "impact": "medium",
+          "mitigation": [
+            "在多个浏览器中预测试",
+            "准备Chrome作为主要演示浏览器",
+            "有移动端演示备份"
+          ]
+        }
+      ],
+
+      "contingency_plans": {
+        "network_failure": {
+          "immediate_action": "切换到移动热点",
+          "backup_plan": "使用离线演示数据",
+          "communication": "向投资人说明这是演示环境，生产环境有冗余保障"
+        },
+        "wallet_connection_issue": {
+          "immediate_action": "使用预连接的备用账户",
+          "backup_plan": "展示连接成功的状态截图",
+          "communication": "强调钱包集成的技术复杂性和我们的解决方案优势"
+        },
+        "data_source_failure": {
+          "immediate_action": "切换到备用数据源",
+          "backup_plan": "使用静态模拟数据",
+          "communication": "说明我们的多源数据聚合策略"
+        }
+      }
+    },
+
+    "success_metrics": {
+      "technical_kpis": {
+        "page_load_time": "< 3秒",
+        "wallet_connection_time": "< 5秒",
+        "trade_execution_time": "< 10秒",
+        "data_update_frequency": "1-3秒",
+        "error_rate": "< 1%"
+      },
+      "demo_effectiveness": {
+        "investor_engagement": "全程保持注意力",
+        "technical_questions": "能够满意回答所有技术问题",
+        "feature_comprehension": "投资人理解核心价值主张",
+        "next_steps": "明确后续尽调和投资意向"
+      }
+    },
+
+    "post_demo_checklist": {
+      "immediate_follow_up": [
+        "记录投资人提出的问题和建议",
+        "整理演示过程中的技术反馈",
+        "评估演示效果和改进点",
+        "更新投资人跟进计划"
+      ],
+      "technical_review": [
+        "检查演示过程中的系统表现",
+        "分析性能数据和用户行为",
+        "识别需要优化的功能点",
+        "更新demo版本和测试用例"
+      ],
+      "business_follow_up": [
+        "发送demo录屏和产品介绍材料",
+        "安排技术尽调会议",
+        "提供详细的商业计划书",
+        "协调后续投资流程"
+      ]
+    }
+  }
+}
