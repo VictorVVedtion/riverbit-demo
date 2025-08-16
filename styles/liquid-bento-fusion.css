@@ -297,6 +297,27 @@
   min-height: 480px;
 }
 
+/* Chart 卡片 - 7×4 优化图表区域 (58%宽度) */
+.bento-chart {
+  grid-column: span 7;
+  grid-row: span 4;
+  min-height: 500px;
+}
+
+/* Trading 卡片 - 3×4 右侧交易面板 (25%宽度) */
+.bento-trading {
+  grid-column: span 3;
+  grid-row: span 4;
+  min-height: 500px;
+}
+
+/* Data 卡片 - 2×4 左侧数据面板 (17%宽度) */
+.bento-data {
+  grid-column: span 2;
+  grid-row: span 4;
+  min-height: 500px;
+}
+
 /* Compact 卡片 - 2×4 紧凑交易表单 */
 .bento-compact {
   grid-column: span 2;
@@ -475,6 +496,24 @@
     grid-row: span 3;
     min-height: 360px;
   }
+
+  .bento-chart {
+    grid-column: span 5;
+    grid-row: span 3;
+    min-height: 360px;
+  }
+
+  .bento-trading {
+    grid-column: span 3;
+    grid-row: span 3;
+    min-height: 360px;
+  }
+
+  .bento-data {
+    grid-column: span 8;
+    grid-row: span 2;
+    min-height: 240px;
+  }
   
   .bento-compact {
     grid-column: span 3;
@@ -511,13 +550,32 @@
     grid-column: span 4;
   }
   
-  /* 移动端专业交易布局调整 */
+  /* 移动端专业交易布局调整 - 垂直堆叠设计 */
   .bento-hero,
+  .bento-chart,
+  .bento-trading,
+  .bento-data,
   .bento-sidebar,
   .bento-compact {
     grid-column: span 4;
     grid-row: span 2;
     min-height: 240px;
+  }
+
+  /* 移动端专用布局 - 交易优先 */
+  .bento-chart {
+    grid-row: span 3;
+    min-height: 300px;
+  }
+
+  .bento-trading {
+    grid-row: span 4;
+    min-height: 400px;
+  }
+
+  .bento-data {
+    grid-row: span 2;
+    min-height: 200px;
   }
   
   /* 移动端性能优化 */
@@ -529,6 +587,59 @@
   
   .river-glass-interactive:hover {
     transform: translateY(-2px) scale(1.01);
+  }
+
+  /* 移动端手势增强 */
+  .mobile-swipe-enabled {
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--river-glass-bg);
+    backdrop-filter: var(--glass-blur-intense);
+    border-radius: 24px 24px 0 0;
+    border: 1px solid var(--river-border);
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-bottom-sheet.active {
+    transform: translateY(0);
+  }
+
+  .mobile-drag-handle {
+    width: 40px;
+    height: 4px;
+    background: rgba(148, 163, 184, 0.5);
+    border-radius: 2px;
+    margin: 12px auto 20px;
+    cursor: grab;
+  }
+
+  .mobile-drag-handle:active {
+    cursor: grabbing;
+  }
+
+  /* 移动端触摸反馈 */
+  .touch-feedback {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .touch-scale {
+    transition: transform 0.1s ease-out;
+  }
+
+  .touch-scale:active {
+    transform: scale(0.95);
   }
 }
 

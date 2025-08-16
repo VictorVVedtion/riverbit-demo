@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingUp, TrendingDown, BarChart3, DollarSign, Zap, Brain, Target, Activity, X } from 'lucide-react';
+import { TrendingUp, TrendingDown, BarChart3, DollarSign, Zap, Brain, Target, Activity, X, Lightbulb, ArrowRight } from 'lucide-react';
 import LiquidGlassCard from './ui/LiquidGlassCard';
 import RiverBentoGrid from './ui/RiverBentoGrid';
 import { Button } from './ui/button';
@@ -224,9 +224,9 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4 overflow-x-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4 overflow-x-hidden mobile-swipe-enabled">
       {/* Animation Styles */}
-      <style jsx>{`
+      <style>{`
         @keyframes flash-green {
           0% { background-color: rgba(34, 197, 94, 0.2); }
           50% { background-color: rgba(34, 197, 94, 0.4); }
@@ -349,8 +349,8 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
             inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
       `}</style>
-      {/* Professional Trading Grid Layout - Optimized for SOTA standards */}
-      <RiverBentoGrid columns={12} className="min-h-screen grid-rows-[120px_auto_380px] gap-3">
+      {/* Professional Trading Grid Layout - Right-Handed Optimized for GMX/Hyperliquid standards */}
+      <RiverBentoGrid columns={12} className="min-h-screen grid-rows-[120px_500px_380px] gap-3">
         
         {/* Enhanced Price Header - Professional Trading Standard */}
         <LiquidGlassCard 
@@ -420,75 +420,67 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
           </div>
         </LiquidGlassCard>
 
-        {/* Portfolio Overview - Focused Component */}
+        {/* Portfolio & Market Data - Left Data Panel (17% width) */}
         <LiquidGlassCard 
-          bentoSize="medium" 
+          bentoSize="data" 
           variant="trading"
-          className="p-5 flex flex-col"
+          className="p-4 flex flex-col overflow-hidden"
         >
-          {/* Professional Portfolio Overview */}
-          <div className={`space-y-4 ${portfolioAnimClass}`}>
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">Portfolio</h3>
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
-                <DollarSign className="w-4 h-4 text-white" />
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/50">
-                <div className="text-sm text-gray-400 mb-1">Total Balance</div>
-                <div className="text-2xl font-mono font-bold text-white smooth-transition">{portfolioData.totalBalance}</div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bg-green-900/20 rounded-xl p-3 border border-green-400/30">
-                  <div className="text-xs text-green-400 mb-1">24h PnL</div>
-                  <div className="text-lg font-mono font-bold text-green-400 smooth-transition">{portfolioData.pnl}</div>
-                </div>
-                <div className="bg-blue-900/20 rounded-xl p-3 border border-blue-400/30">
-                  <div className="text-xs text-blue-400 mb-1">ROI</div>
-                  <div className="text-lg font-mono font-bold text-blue-400 smooth-transition">+12.3%</div>
+          <div className="flex-1 space-y-3 overflow-y-auto custom-scrollbar">
+            {/* Compact Portfolio Overview */}
+            <div className={`space-y-3 ${portfolioAnimClass}`}>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-bold text-white">Portfolio</h3>
+                <div className="w-6 h-6 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                  <DollarSign className="w-3 h-3 text-white" />
                 </div>
               </div>
               
-              <div className="flex justify-between text-sm">
-                <div className="text-center">
-                  <div className="text-white font-semibold">{portfolioData.positions}</div>
-                  <div className="text-gray-400">Positions</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-white font-semibold">{portfolioData.openOrders}</div>
-                  <div className="text-gray-400">Orders</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-white font-semibold">87.5%</div>
-                  <div className="text-gray-400">Win Rate</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </LiquidGlassCard>
-
-        {/* Market Data & Order Book - Separate Component */}
-        <LiquidGlassCard 
-          bentoSize="medium" 
-          variant="orderbook"
-          className="p-4 flex flex-col"
-        >
-          <div className="flex-1 space-y-4 overflow-y-auto custom-scrollbar">
-            {/* Hot Markets Section */}
-            <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-white">Hot Markets</h3>
               <div className="space-y-2">
-                {marketData.map((market, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 hover:bg-slate-800/40 rounded-lg cursor-pointer hover-scale smooth-transition border border-slate-700/30">
+                <div className="bg-slate-800/40 rounded-lg p-3 border border-slate-700/50">
+                  <div className="text-xs text-gray-400 mb-1">Total Balance</div>
+                  <div className="text-lg font-mono font-bold text-white smooth-transition">{portfolioData.totalBalance}</div>
+                </div>
+                
+                <div className="grid grid-cols-1 gap-2">
+                  <div className="bg-green-900/20 rounded-lg p-2 border border-green-400/30">
+                    <div className="text-xs text-green-400 mb-1">24h PnL</div>
+                    <div className="text-sm font-mono font-bold text-green-400 smooth-transition">{portfolioData.pnl}</div>
+                  </div>
+                  <div className="bg-blue-900/20 rounded-lg p-2 border border-blue-400/30">
+                    <div className="text-xs text-blue-400 mb-1">ROI</div>
+                    <div className="text-sm font-mono font-bold text-blue-400 smooth-transition">+12.3%</div>
+                  </div>
+                </div>
+                
+                <div className="flex justify-between text-xs">
+                  <div className="text-center">
+                    <div className="text-white font-semibold">{portfolioData.positions}</div>
+                    <div className="text-gray-400">Pos</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-white font-semibold">{portfolioData.openOrders}</div>
+                    <div className="text-gray-400">Orders</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-white font-semibold">87.5%</div>
+                    <div className="text-gray-400">Win</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Compact Markets Section */}
+            <div className="space-y-2">
+              <h3 className="text-sm font-semibold text-white">Hot Markets</h3>
+              <div className="space-y-1">
+                {marketData.slice(0, 3).map((market, i) => (
+                  <div key={i} className="flex items-center justify-between p-2 hover:bg-slate-800/40 rounded-lg cursor-pointer hover-scale smooth-transition border border-slate-700/30">
                     <div>
-                      <div className="text-sm font-semibold text-white">{market.symbol}</div>
+                      <div className="text-xs font-semibold text-white">{market.symbol}</div>
                       <div className="text-xs text-gray-400">{market.volume}</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-mono font-medium text-white smooth-transition">{market.price}</div>
+                      <div className="text-xs font-mono font-medium text-white smooth-transition">{market.price}</div>
                       <div className={`text-xs font-semibold smooth-transition ${market.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
                         {market.change}
                       </div>
@@ -498,45 +490,36 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
               </div>
             </div>
 
-            {/* Professional Order Book */}
-            <div className="space-y-3">
+            {/* Compact Order Book */}
+            <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">Order Book</h3>
+                <h3 className="text-sm font-semibold text-white">Order Book</h3>
                 <Badge variant="outline" className="text-xs border-river-surface text-river-surface">BTC/USDT</Badge>
               </div>
 
-              <div className="space-y-2">
-                <div className="grid grid-cols-3 text-xs font-semibold text-gray-300 pb-2 border-b border-slate-600">
-                  <span>Price (USDT)</span>
-                  <span className="text-right">Amount (BTC)</span>
-                  <span className="text-right">Total</span>
-                </div>
-
-                {/* Enhanced Ask Orders */}
+              <div className="space-y-1">
+                {/* Compact Ask Orders */}
                 <div className={`space-y-1 ${orderBookAnimClass}`}>
-                  {orderBook.asks.slice(0, 4).map((ask, i) => (
-                    <div key={i} className="grid grid-cols-3 text-xs hover:bg-red-900/20 p-2 rounded-lg cursor-pointer smooth-transition hover-scale border border-transparent hover:border-red-400/30">
+                  {orderBook.asks.slice(0, 2).map((ask, i) => (
+                    <div key={i} className="grid grid-cols-2 text-xs hover:bg-red-900/20 p-1 rounded cursor-pointer smooth-transition">
                       <span className="text-red-400 font-mono font-semibold">{ask.price.toLocaleString()}</span>
-                      <span className="text-right text-gray-300 font-mono">{ask.amount.toFixed(4)}</span>
-                      <span className="text-right text-gray-400 font-mono text-xs">{ask.total.toLocaleString()}</span>
+                      <span className="text-right text-gray-300 font-mono">{ask.amount.toFixed(3)}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="py-2 text-center border-y border-slate-600 bg-slate-800/30 rounded-lg">
-                  <span className={`text-xl font-mono font-bold text-white smooth-transition ${priceFlashClass}`}>
-                    {btcPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                <div className="py-1 text-center border-y border-slate-600 bg-slate-800/30 rounded">
+                  <span className={`text-sm font-mono font-bold text-white smooth-transition ${priceFlashClass}`}>
+                    {btcPrice.toLocaleString('en-US', { minimumFractionDigits: 0 })}
                   </span>
-                  <div className="text-xs text-gray-400 mt-1">Spread: 0.01%</div>
                 </div>
 
-                {/* Enhanced Bid Orders */}
+                {/* Compact Bid Orders */}
                 <div className={`space-y-1 ${orderBookAnimClass}`}>
-                  {orderBook.bids.slice(0, 4).map((bid, i) => (
-                    <div key={i} className="grid grid-cols-3 text-xs hover:bg-green-900/20 p-2 rounded-lg cursor-pointer smooth-transition hover-scale border border-transparent hover:border-green-400/30">
+                  {orderBook.bids.slice(0, 2).map((bid, i) => (
+                    <div key={i} className="grid grid-cols-2 text-xs hover:bg-green-900/20 p-1 rounded cursor-pointer smooth-transition">
                       <span className="text-green-400 font-mono font-semibold">{bid.price.toLocaleString()}</span>
-                      <span className="text-right text-gray-300 font-mono">{bid.amount.toFixed(4)}</span>
-                      <span className="text-right text-gray-400 font-mono text-xs">{bid.total.toLocaleString()}</span>
+                      <span className="text-right text-gray-300 font-mono">{bid.amount.toFixed(3)}</span>
                     </div>
                   ))}
                 </div>
@@ -545,9 +528,9 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
           </div>
         </LiquidGlassCard>
 
-        {/* 图表区域 - 主要英雄区域 (58%宽度) */}
+        {/* Chart Area - Main Hero Area (58% width) */}
         <LiquidGlassCard 
-          bentoSize="hero" 
+          bentoSize="chart" 
           variant="chart"
           className="p-4"
         >
@@ -574,12 +557,12 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
           </div>
         </LiquidGlassCard>
 
-        {/* Professional Trading Form - Enhanced */}
+        {/* Professional Trading Panel - Right Side (25% width) */}
         <LiquidGlassCard 
-          bentoSize="compact" 
+          bentoSize="trading" 
           variant="trading"
           withRipple={true}
-          className="p-5 border border-river-surface/20"
+          className="p-5 border border-river-surface/20 flex flex-col"
         >
           <div className="space-y-4">
             {/* Enhanced Trading Header */}
@@ -593,7 +576,7 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
                   size="sm" 
                   variant={side === 'buy' ? 'default' : 'ghost'}
                   onClick={() => setSide('buy')}
-                  className={`button-press smooth-transition px-4 py-2 rounded-lg font-semibold ${side === 'buy' ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/30' : 'text-green-400 hover:bg-green-400/10'}`}
+                  className={`button-press smooth-transition touch-feedback touch-scale px-4 py-2.5 rounded-lg font-semibold flex-1 ${side === 'buy' ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/30' : 'text-green-400 hover:bg-green-400/10'}`}
                 >
                   BUY
                 </Button>
@@ -601,9 +584,21 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
                   size="sm" 
                   variant={side === 'sell' ? 'default' : 'ghost'}
                   onClick={() => setSide('sell')}
-                  className={`button-press smooth-transition px-4 py-2 rounded-lg font-semibold ${side === 'sell' ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/30' : 'text-red-400 hover:bg-red-400/10'}`}
+                  className={`button-press smooth-transition touch-feedback touch-scale px-4 py-2.5 rounded-lg font-semibold flex-1 ${side === 'sell' ? 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-600/30' : 'text-red-400 hover:bg-red-400/10'}`}
                 >
                   SELL
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="ghost"
+                  onClick={() => setShowAIAssistant(!showAIAssistant)}
+                  className={`button-press smooth-transition touch-feedback touch-scale px-3 py-2.5 rounded-lg font-medium flex items-center space-x-1 relative ${showAIAssistant ? 'text-purple-300 bg-purple-500/15 border border-purple-400/30' : 'text-purple-400 hover:bg-purple-400/10 hover:text-purple-300'}`}
+                  title="AI Trading Assistant"
+                >
+                  <Brain className="w-4 h-4" />
+                  {showAIAssistant && (
+                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                  )}
                 </Button>
               </div>
             </div>
@@ -804,7 +799,7 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
             {/* Professional Execute Button */}
             <div className="pt-2">
               <Button 
-                className={`w-full h-12 button-press smooth-transition text-lg font-bold tracking-wide ${side === 'buy' 
+                className={`w-full h-12 button-press smooth-transition touch-feedback touch-scale text-lg font-bold tracking-wide ${side === 'buy' 
                   ? 'bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-lg shadow-green-600/30' 
                   : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg shadow-red-600/30'
                 } border-0 rounded-xl`}
@@ -830,6 +825,88 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
                 </div>
               </div>
             </div>
+
+            {/* AI Trading Assistant Panel - Enhanced with Mobile Optimization */}
+            {showAIAssistant && (
+              <div className="mt-4 p-4 bg-gradient-to-br from-purple-900/20 to-purple-800/10 rounded-xl border border-purple-400/30 animate-slide-in-right">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <Brain className="w-4 h-4 text-purple-400" />
+                    <h4 className="text-sm font-bold text-purple-400">AI Trading Assistant</h4>
+                    <Badge variant="outline" className="text-xs border-green-400 text-green-400 ml-2">
+                      Live
+                    </Badge>
+                  </div>
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    onClick={() => setShowAIAssistant(false)}
+                    className="h-6 w-6 p-0 text-purple-400 hover:text-purple-300"
+                  >
+                    <X className="w-3 h-3" />
+                  </Button>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="text-xs text-purple-300 bg-purple-900/20 rounded-lg p-3 border border-purple-400/20">
+                    <div className="flex items-start space-x-2">
+                      <Lightbulb className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <div className="font-semibold mb-1">AI Market Analysis</div>
+                        <div>BTC showing bullish momentum above $67,000. RSI indicates healthy correction potential.</div>
+                        <div className="mt-2 text-xs text-purple-400">
+                          Entry: $67,200 • SL: $66,500 • TP: $68,800
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="w-full text-xs bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30 h-9 font-medium"
+                      onClick={() => {
+                        setSide('buy');
+                        setLeverage(10);
+                        setAmount('0.1');
+                        setPrice('67200');
+                      }}
+                    >
+                      <ArrowRight className="w-3 h-3 mr-2" />
+                      Apply AI Strategy
+                    </Button>
+                    
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="text-xs bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30 h-8"
+                      >
+                        📊 Analysis
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="text-xs bg-purple-900/20 border-purple-400/50 text-purple-300 hover:bg-purple-800/30 h-8"
+                      >
+                        🎯 Alerts
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="text-xs text-gray-400 border-t border-purple-400/20 pt-2">
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center space-x-1">
+                        <Activity className="w-3 h-3" />
+                        <span>Confidence: 78%</span>
+                      </span>
+                      <span className="text-xs opacity-70">Updated 30s ago</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </LiquidGlassCard>
 
@@ -1021,76 +1098,9 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
 
       </RiverBentoGrid>
 
-      {/* AI Assistant Right-Side Floating Panel - Enhanced Responsive Design */}
-      {showAIAssistant && (
-        <div className="fixed right-4 top-24 w-[420px] max-w-[calc(100vw-32px)] h-[calc(100vh-112px)] z-50 
-          bg-slate-950/98 backdrop-blur-xl border border-purple-400/30 rounded-2xl 
-          shadow-2xl shadow-purple-500/20 animate-slide-in-right overflow-hidden
-          lg:w-[420px] md:w-[380px] sm:w-[calc(100vw-32px)] sm:right-4 sm:left-4">
-          
-          {/* AI Panel Header */}
-          <div className="flex items-center justify-between p-4 border-b border-purple-400/20 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
-            <div className="flex items-center space-x-3 min-w-0">
-              <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <Brain className="w-5 h-5 text-white" />
-              </div>
-              <div className="min-w-0">
-                <h3 className="text-lg font-bold text-white truncate">AI Trading Assistant</h3>
-                <div className="flex items-center space-x-2">
-                  <p className="text-xs text-gray-400 truncate">Real-time market insights</p>
-                  <div className="hidden sm:flex items-center text-xs text-gray-500">
-                    <span>•</span>
-                    <span className="ml-1">Alt+A to toggle</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-2 flex-shrink-0">
-              <Badge className="bg-green-500/20 text-green-400 border-green-400/30 text-xs">
-                {isConnected ? 'Online' : 'Offline'}
-              </Badge>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={() => setShowAIAssistant(false)}
-                className="h-8 w-8 p-0 hover:bg-purple-400/20 rounded-lg transition-colors"
-                title="Close AI Assistant (Esc)"
-              >
-                <X className="w-4 h-4 text-gray-400" />
-              </Button>
-            </div>
-          </div>
-          
-          {/* AI Chat Component with Error Boundary */}
-          <div className="h-[calc(100%-80px)] relative">
-            <TradingAssistantChat
-              userAddress={userAddress}
-              isConnected={isConnected}
-              accountBalance={125340.56}
-              className="h-full"
-              onPlanExecute={async (plan) => {
-                // Mock plan execution
-                console.log('Executing trading plan:', plan);
-                toast.success(`🚀 Executing ${plan.signal.direction} plan for ${plan.symbol}`);
-              }}
-              onPlanBookmark={(planId) => {
-                console.log('Bookmarking plan:', planId);
-                toast.success('📚 Trading plan bookmarked!');
-              }}
-              onPlanShare={(plan) => {
-                console.log('Sharing plan:', plan);
-                toast.success('📤 Trading plan shared!');
-              }}
-            />
-            
-            {/* Connection Status Overlay - 已删除，用户不喜欢 */}
-          </div>
-        </div>
-      )}
 
       {/* AI Panel Slide Animation */}
-      <style jsx>{`
+      <style>{`
         @keyframes slide-in-right {
           from {
             transform: translateX(100%);
@@ -1104,6 +1114,38 @@ const LiquidBentoTradingInterface: React.FC<LiquidBentoTradingInterfaceProps> = 
         
         .animate-slide-in-right {
           animation: slide-in-right 300ms ease-out;
+        }
+        
+        /* Mobile AI Button Optimizations */
+        @media (max-width: 768px) {
+          .ai-mobile-stack {
+            flex-direction: column;
+            gap: 8px;
+          }
+          
+          .ai-mobile-stack .ai-button {
+            width: 100%;
+            justify-content: center;
+          }
+          
+          .trading-buttons-mobile {
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+          }
+          
+          .ai-panel-mobile {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px 16px 0 0;
+            max-height: 70vh;
+            overflow-y: auto;
+          }
         }
       `}</style>
 

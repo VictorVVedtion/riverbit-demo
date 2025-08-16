@@ -107,12 +107,12 @@ const App = () => {
     markOnboardingComplete();
   };
 
-  // 检查是否显示引导
-  useEffect(() => {
-    if (shouldShowOnboarding) {
-      setShowOnboarding(true);
-    }
-  }, [shouldShowOnboarding]);
+  // 检查是否显示引导 - 已禁用，用户不喜欢引导弹窗
+  // useEffect(() => {
+  //   if (shouldShowOnboarding) {
+  //     setShowOnboarding(true);
+  //   }
+  // }, [shouldShowOnboarding]);
 
   // 全局快捷键处理
   useEffect(() => {

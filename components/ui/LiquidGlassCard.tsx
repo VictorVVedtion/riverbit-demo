@@ -7,7 +7,7 @@ interface LiquidGlassCardProps extends HTMLAttributes<HTMLDivElement> {
   interactive?: boolean;
   withRipple?: boolean;
   withGlow?: 'none' | 'river' | 'profit' | 'loss';
-  bentoSize?: 'nano' | 'small' | 'medium' | 'large' | 'xlarge' | 'wide' | 'full' | 'hero' | 'compact' | 'sidebar';
+  bentoSize?: 'nano' | 'small' | 'medium' | 'large' | 'xlarge' | 'wide' | 'full' | 'hero' | 'compact' | 'sidebar' | 'chart' | 'trading' | 'data';
   glassLevel?: 'nano' | 'subtle' | 'medium' | 'intense' | 'ultra';
   riverTheme?: boolean;
 }
@@ -51,7 +51,10 @@ const LiquidGlassCard: React.FC<LiquidGlassCardProps> = ({
     full: 'bento-full',
     hero: 'bento-hero',
     compact: 'bento-compact',
-    sidebar: 'bento-sidebar'
+    sidebar: 'bento-sidebar',
+    chart: 'bento-chart',
+    trading: 'bento-trading',
+    data: 'bento-data'
   }[bentoSize] : '';
 
   // 交互和特效类
