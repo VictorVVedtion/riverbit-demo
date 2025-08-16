@@ -6,6 +6,7 @@
 @import "./sota-animations.css";
 @import "./sota-glassmorphism.css";
 @import "./liquid-bento-fusion.css";
+@import "./ai-trading-assistant.css";
 
 @custom-variant dark (&:is(.dark *));
 

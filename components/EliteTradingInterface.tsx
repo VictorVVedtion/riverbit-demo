@@ -8,7 +8,6 @@ import { Slider } from './ui/slider';
 import { 
   Wallet, Eye, EyeOff, Activity
 } from 'lucide-react';
-import SimpleTradingView from './SimpleTradingView';
 import DirectTradingView from './DirectTradingView';
 import { usePriceUpdates } from '../utils/priceApi';
 
