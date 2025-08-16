@@ -1,4 +1,4 @@
-# RiverBit DeFi Trading Platform
+#xxx demo
 
 🚀 世界首个集成AI交易助手的DeFi交易平台 - RiverBit是一个基于 React + TypeScript + Tailwind CSS 构建的现代化 DeFi 交易平台，具备智能交易助手、风险管理、流动性挖矿等完整功能。
 
