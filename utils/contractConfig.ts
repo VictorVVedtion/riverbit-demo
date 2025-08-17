@@ -7,10 +7,14 @@ export const CONTRACT_CONFIG = {
     rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
     blockExplorer: 'https://sepolia.arbiscan.io',
     contracts: {
-      // 测试网USDC地址 (如果没有可以部署一个mock)
-      USDC: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d', // Arbitrum Sepolia USDC
+      // 完全无限制USDC Faucet (推荐使用 - 无任何限制)
+      UNLIMITED_USDC: '0x56bbaEb426980c930dd1b8476aF9fA4F0B983e33', // Unlimited USDC Faucet - NO LIMITS! (最新部署)
+      // RiverBit测试USDC地址 (已部署的USDCFaucet合约)
+      USDC: '0xa54cE3980863227b77308AA576589d5a8Be1cdB9', // RiverBit USDC Faucet (original)
+      // 简化版USDC Faucet (5分钟冷却，更友好的测试体验)
+      SIMPLE_USDC: '0x3E60A6c107229CA462DFfb873796651dde00FE8d', // Simple USDC Faucet
       // RiverBit核心合约地址 (已部署 - RiverBitCoreV2)
-      RIVERBIT_CORE: '0xA12BdBf28af28EC5C5A3d9DDA65F637d8B683a5a', 
+      RIVERBIT_CORE: '0xF307f083Ca4862C1093DA2283a3224822848581D', 
     }
   },
   
@@ -76,6 +80,29 @@ export const USDC_FAUCET_ABI = [
   "function getRemainingCooldown(address user) external view returns (uint256)",
   "function canMint(address user, uint256 amount) external view returns (bool canMint, string memory reason)",
   "function getFaucetStats() external view returns (bool enabled, uint256 minted, uint256 maxMint, uint256 dailyLimit, uint256 cooldown)"
+];
+
+// 无限制USDC Faucet ABI (推荐使用)
+export const UNLIMITED_USDC_FAUCET_ABI = [
+  "function faucetMint(uint256 amount) external",
+  "function mintTo(address to, uint256 amount) external", 
+  "function batchMint(address[] calldata recipients, uint256[] calldata amounts) external",
+  "function mintPreset(uint8 preset) external", // 0=1K, 1=10K, 2=100K, 3=1M, 4=10M
+  "function mintMillion() external", // Quick mint 1M USDC
+  "function mintTenMillion() external", // Quick mint 10M USDC
+  "function balanceOf(address account) external view returns (uint256)",
+  "function decimals() external view returns (uint8)",
+  "function symbol() external view returns (string)",
+  "function name() external view returns (string)",
+  "function totalSupply() external view returns (uint256)",
+  "function totalMinted() external view returns (uint256)",
+  "function canMint(address user, uint256 amount) external pure returns (bool canMint, string memory reason)",
+  "function getFaucetStats() external view returns (uint256 minted, uint256 supply)",
+  "function transfer(address to, uint256 amount) external returns (bool)",
+  "function approve(address spender, uint256 amount) external returns (bool)",
+  "function allowance(address owner, address spender) external view returns (uint256)",
+  // Events
+  "event FaucetMint(address indexed to, uint256 amount, uint256 timestamp)"
 ];
 
 // 网络配置

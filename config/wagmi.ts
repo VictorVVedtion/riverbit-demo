@@ -1,70 +1,98 @@
-import { arbitrum, arbitrumSepolia } from 'viem/chains'
-import { createConfig, http } from 'wagmi'
-import { metaMask, walletConnect, injected } from 'wagmi/connectors'
+/**
+ * Simplified Wagmi Configuration for Frontend Demo
+ * Designed to work without backend dependencies and external API calls
+ */
 
-// 1. Demo projectId - 简化配置避免外部API调用
-export const projectId = 'demo-riverbit-trading-platform'
+// Mock configuration for frontend demo mode
+export const projectId = 'riverbit-frontend-demo'
 
-// 2. Development environment detection
-const isDevelopment = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-const currentPort = typeof window !== 'undefined' ? window.location.port : '5175'
-const baseUrl = isDevelopment ? `http://localhost:${currentPort}` : 'https://riverbit-demo.vercel.app'
-
-// 3. Create simplified wagmi config without external dependencies
-export const config = createConfig({
-  chains: [arbitrumSepolia, arbitrum],
-  connectors: [
-    injected(),
-    metaMask(),
-    walletConnect({
-      projectId: 'demo',
-      metadata: {
-        name: 'RiverBit Demo',
-        description: 'Demo Trading Platform',
-        url: baseUrl,
-        icons: []
-      },
-      showQrModal: false // 禁用QR模态框避免API调用
-    })
-  ],
-  transports: {
-    [arbitrumSepolia.id]: http('https://sepolia-rollup.arbitrum.io/rpc'),
-    [arbitrum.id]: http('https://arb1.arbitrum.io/rpc')
+// Simplified chains configuration for demo
+export const chains = [
+  {
+    id: 421614,
+    name: 'Arbitrum Sepolia',
+    network: 'arbitrum-sepolia',
+    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+    rpcUrls: {
+      default: { http: ['https://sepolia-rollup.arbitrum.io/rpc'] },
+      public: { http: ['https://sepolia-rollup.arbitrum.io/rpc'] }
+    },
+    blockExplorers: {
+      default: { name: 'Arbiscan', url: 'https://sepolia.arbiscan.io' }
+    },
+    testnet: true
+  },
+  {
+    id: 42161,
+    name: 'Arbitrum One',
+    network: 'arbitrum',
+    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+    rpcUrls: {
+      default: { http: ['https://arb1.arbitrum.io/rpc'] },
+      public: { http: ['https://arb1.arbitrum.io/rpc'] }
+    },
+    blockExplorers: {
+      default: { name: 'Arbiscan', url: 'https://arbiscan.io' }
+    },
+    testnet: false
   }
-})
+]
 
-// 3. Create modal placeholder (for compatibility)
-export const modal = {
-  open: () => console.log('Demo mode: Wallet connection'),
-  close: () => console.log('Demo mode: Wallet disconnection')
+// Demo-only configuration that doesn't actually connect to Web3
+export const config = {
+  chains,
+  connectors: [],
+  transports: {},
+  // Mock methods for demo compatibility
+  getClient: () => null,
+  getPublicClient: () => null,
+  getWalletClient: () => null
 }
 
-// 5. Export types for type safety
-export type Config = typeof config
-export type Chain = typeof arbitrumSepolia | typeof arbitrum
+// Mock modal for demo mode
+export const modal = {
+  open: () => {
+    console.log('🎭 Demo Mode: Wallet connection UI would open here')
+    return Promise.resolve()
+  },
+  close: () => {
+    console.log('🎭 Demo Mode: Wallet connection UI would close here')
+    return Promise.resolve()
+  }
+}
 
-// 6. Network configuration for RiverBit contracts
+// Network configuration for contracts (demo addresses)
 export const NETWORK_CONFIG = {
-  [arbitrumSepolia.id]: {
+  [421614]: { // Arbitrum Sepolia
     name: 'Arbitrum Sepolia',
     shortName: 'arbsep',
-    chainId: arbitrumSepolia.id,
-    rpcUrl: 'https://arbitrum-sepolia.blockpi.network/v1/rpc/public',
+    chainId: 421614,
+    rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
     blockExplorer: 'https://sepolia.arbiscan.io',
     contracts: {
-      riverbitCoreV2: '0xA12BdBf28af28EC5C5A3d9DDA65F637d8B683a5a', // Latest deployed address
-      usdc: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d' // Arbitrum Sepolia USDC
+      riverbitCoreV2: '0xA12BdBf28af28EC5C5A3d9DDA65F637d8B683a5a',
+      usdc: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d'
     }
   },
-  [arbitrum.id]: {
+  [42161]: { // Arbitrum One
     name: 'Arbitrum One',
     shortName: 'arb',
-    chainId: arbitrum.id,
-    rpcUrl: 'https://arbitrum.blockpi.network/v1/rpc/public',
+    chainId: 42161,
+    rpcUrl: 'https://arb1.arbitrum.io/rpc',
     blockExplorer: 'https://arbiscan.io',
     contracts: {
-      riverbitCoreV2: '0x0000000000000000000000000000000000000000', // To be deployed
-      usdc: '0xA0b86a33E6417FA891A4F0A7fD9F6CdDFbC65Ea' // Arbitrum One USDC
+      riverbitCoreV2: '0x0000000000000000000000000000000000000000',
+      usdc: '0xA0b86a33E6417FA891A4F0A7fD9F6CdDFbC65Ea'
     }
   }
 }
+
+// Export types for compatibility
+export type Config = typeof config
+export type Chain = typeof chains[0]
+
+// Demo mode utilities
+export const isDemoMode = true
+export const isWeb3Enabled = false
+
+console.log('🎭 RiverBit Demo Mode: wagmi configuration loaded (frontend-only)')

@@ -1,0 +1,22 @@
+{
+  "network": "arbitrumSepolia",
+  "chainId": 421614,
+  "timestamp": 1755377317900,
+  "contracts": {
+    "RiverBitCoreV2": "0xF307f083Ca4862C1093DA2283a3224822848581D",
+    "SAuthSettlement": "0x6CdB4745B98633a9f22E8F9De12b2178d806A8F0",
+    "LPBucketManager": "0xEc24A984247B24b75292182720359a265bDdAfd6",
+    "ThreeGatesRiskManager": "0x520Ff4c4896b5294852aB6362A88C5291B7C67e0",
+    "GovernanceRegistry": "0x6b9809F5496a8858F8446281b1d81E89F7a9225B"
+  },
+  "usdcAddress": "0xa54cE3980863227b77308AA576589d5a8Be1cdB9",
+  "simpleUsdcAddress": "0x3E60A6c107229CA462DFfb873796651dde00FE8d",
+  "lastUpdated": 1755380489656,
+  "UnlimitedUSDCFaucet": {
+    "address": "0x8471eA5e5818b8752356D42b373d44912362daf4",
+    "deployer": "0x97e05F0c5426b497f4E1f40679AAaa887D7A0511",
+    "deploymentTime": "2025-08-16T21:51:29.500Z",
+    "network": "arbitrumSepolia",
+    "chainId": "421614"
+  }
+}

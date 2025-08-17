@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfessionalAIChat from './ProfessionalAIChat';
+import CompactProfessionalAI from './CompactProfessionalAI';
 
 interface TradingAssistantChatProps {
   userAddress?: string;
@@ -14,11 +14,11 @@ interface TradingAssistantChatProps {
 }
 
 const TradingAssistantChat: React.FC<TradingAssistantChatProps> = (props) => {
-  // Pass all props to the professional AI chat component for context-aware responses
+  // Use the compact AI chat designed specifically for the right trading panel
   return (
-    <ProfessionalAIChat 
+    <CompactProfessionalAI 
       {...props}
-      className={`professional-ai-chat-enhanced ${props.className || ''}`}
+      className={`compact-ai-trading-panel ${props.className || ''}`}
     />
   );
 };

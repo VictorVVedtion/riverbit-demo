@@ -75,7 +75,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
             )}
           </div>
         </div>
-      </LiquidGlassCard>
+      </div>
 
       {/* 主內容區域 - 可滾動 */}
       <div className="flex-1 overflow-y-auto">
@@ -517,6 +517,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
                       <div className="font-medium text-sm text-primary">流動性挖礦</div>
                       <div className="text-xs text-tertiary">RiverPool 收益</div>
                     </div>
+                  </div>
                   </div>
                 </div>
               </LiquidGlassCard>

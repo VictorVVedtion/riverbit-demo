@@ -10,6 +10,7 @@ import {
 
 // Import professional AI styling
 import '../../styles/ai-trading-professional.css';
+import '../../styles/ai-trading-professional-enhanced.css';
 
 // Types
 interface ChatMessage {
@@ -370,7 +371,7 @@ const ProfessionalAIChat: React.FC<ProfessionalAIChatProps> = ({
   const currentPrompts = CONTEXT_PROMPTS[marketContext];
 
   return (
-    <div className="ai-trading-professional">
+    <div className={`ai-trading-professional enhanced ${isFullscreen ? 'fullscreen' : ''} ${className}`}>
       {/* Professional Header */}
       <div className="ai-trading-header">
         <div className="ai-header-brand">

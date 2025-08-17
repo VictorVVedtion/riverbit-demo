@@ -1,0 +1,16 @@
+{
+  "UNLIMITED_USDC_ADDRESS": "0x56bbaEb426980c930dd1b8476aF9fA4F0B983e33",
+  "UNLIMITED_USDC_ABI": [
+    "function faucetMint(uint256 amount) external",
+    "function mintTo(address to, uint256 amount) external",
+    "function mintPreset(uint8 preset) external",
+    "function mintMillion() external",
+    "function mintTenMillion() external",
+    "function balanceOf(address account) external view returns (uint256)",
+    "function decimals() external pure returns (uint8)",
+    "function name() external view returns (string)",
+    "function symbol() external view returns (string)",
+    "function canMint(address user, uint256 amount) external view returns (bool, string)",
+    "function getFaucetStats() external view returns (bool, uint256)"
+  ]
+}

@@ -39,16 +39,25 @@ export default {
         trading: ['JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', 'monospace'],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }], 
-        'base': ['1rem', { lineHeight: '1.5rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-        '5xl': ['3rem', { lineHeight: '1' }],
-        '6xl': ['3.75rem', { lineHeight: '1' }],
+        // Ultra-Compact Typography System
+        'micro': ['0.625rem', { lineHeight: '0.75rem' }],     // 10px
+        'tiny': ['0.6875rem', { lineHeight: '0.8125rem' }],   // 11px
+        'xs': ['0.75rem', { lineHeight: '1rem' }],            // 12px
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],        // 14px
+        'base': ['1rem', { lineHeight: '1.5rem' }],           // 16px
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],        // 18px
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],         // 20px
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],            // 24px
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],       // 30px
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],         // 36px
+        '5xl': ['3rem', { lineHeight: '1' }],                 // 48px
+        '6xl': ['3.75rem', { lineHeight: '1' }],              // 60px
+        
+        // Trading Interface Specific Typography
+        'trading-label': ['0.625rem', { lineHeight: '0.875rem', fontWeight: '500' }],      // Labels
+        'trading-data': ['0.75rem', { lineHeight: '1rem', fontWeight: '600' }],            // Data display
+        'trading-price': ['1.25rem', { lineHeight: '1.5rem', fontWeight: '800' }],         // Price display
+        'trading-button': ['0.75rem', { lineHeight: '1rem', fontWeight: '600' }],          // Button text
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -169,6 +178,61 @@ export default {
         'info': '#0ea5e9',
         'neutral': '#64748b',
         'default': '#334155',
+
+        // SOTA Professional Trading Colors
+        'trading-green': {
+          50: 'var(--trading-green-50)',
+          100: 'var(--trading-green-100)',
+          200: 'var(--trading-green-200)',
+          300: 'var(--trading-green-300)',
+          400: 'var(--trading-green-400)',
+          500: 'var(--trading-green-500)',
+          600: 'var(--trading-green-600)',
+          700: 'var(--trading-green-700)',
+          800: 'var(--trading-green-800)',
+          900: 'var(--trading-green-900)',
+          DEFAULT: 'var(--trading-green-500)',
+        },
+        'trading-red': {
+          50: 'var(--trading-red-50)',
+          100: 'var(--trading-red-100)',
+          200: 'var(--trading-red-200)',
+          300: 'var(--trading-red-300)',
+          400: 'var(--trading-red-400)',
+          500: 'var(--trading-red-500)',
+          600: 'var(--trading-red-600)',
+          700: 'var(--trading-red-700)',
+          800: 'var(--trading-red-800)',
+          900: 'var(--trading-red-900)',
+          DEFAULT: 'var(--trading-red-500)',
+        },
+        'trading-gray': {
+          50: 'var(--trading-gray-50)',
+          100: 'var(--trading-gray-100)',
+          200: 'var(--trading-gray-200)',
+          300: 'var(--trading-gray-300)',
+          400: 'var(--trading-gray-400)',
+          500: 'var(--trading-gray-500)',
+          600: 'var(--trading-gray-600)',
+          700: 'var(--trading-gray-700)',
+          800: 'var(--trading-gray-800)',
+          900: 'var(--trading-gray-900)',
+          DEFAULT: 'var(--trading-gray-500)',
+        },
+        
+        // Trading Interface Colors
+        'trading-text': {
+          primary: 'var(--trading-text-primary)',
+          secondary: 'var(--trading-text-secondary)',
+          muted: 'var(--trading-text-muted)',
+          disabled: 'var(--trading-text-disabled)',
+        },
+        'trading-bg': {
+          primary: 'var(--trading-bg-primary)',
+          secondary: 'var(--trading-bg-secondary)',
+          tertiary: 'var(--trading-bg-tertiary)',
+          elevated: 'var(--trading-bg-elevated)',
+        },
         
         // Interactive States
         'border-default': 'var(--border)',
@@ -193,7 +257,7 @@ export default {
         'full': 'var(--radius-full)',
       },
       
-      // Professional Spacing Scale
+      // Professional Spacing Scale + Ultra-Compact Extensions
       spacing: {
         '18': '4.5rem',
         '88': '22rem',
@@ -204,6 +268,25 @@ export default {
         'golden-sm': 'var(--space-golden-sm)',
         'golden-md': 'var(--space-golden-md)',
         'golden-lg': 'var(--space-golden-lg)',
+        
+        // Ultra-Compact Spacing System
+        'ultra-0': 'var(--ultra-space-0)',    // 0px
+        'ultra-1': 'var(--ultra-space-1)',    // 2px
+        'ultra-2': 'var(--ultra-space-2)',    // 4px
+        'ultra-3': 'var(--ultra-space-3)',    // 6px
+        'ultra-4': 'var(--ultra-space-4)',    // 8px
+        'ultra-5': 'var(--ultra-space-5)',    // 10px
+        'ultra-6': 'var(--ultra-space-6)',    // 12px
+        'ultra-8': 'var(--ultra-space-8)',    // 16px
+        'ultra-10': 'var(--ultra-space-10)',  // 20px
+        'ultra-12': 'var(--ultra-space-12)',  // 24px
+        
+        // Trading Interface Specific
+        'trading-xs': '0.125rem',   // 2px
+        'trading-sm': '0.25rem',    // 4px
+        'trading-md': '0.375rem',   // 6px
+        'trading-lg': '0.5rem',     // 8px
+        'trading-xl': '0.75rem',    // 12px
       },
       
       height: {
@@ -606,5 +689,6 @@ export default {
     }
   ],
 }
+
 
 

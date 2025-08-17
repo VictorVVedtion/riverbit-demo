@@ -9,13 +9,13 @@ export const NETWORK_CONFIG = {
     rpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
     blockExplorer: 'https://sepolia.arbiscan.io',
     contracts: {
-      // New RiverBit MVP Deployment (2025-08-16)
-      riverbitCoreV2: '0xA12BdBf28af28EC5C5A3d9DDA65F637d8B683a5a' as `0x${string}`,
-      sAuthSettlement: '0x77CD1024a8deEA3F877aB116184b993eF4E25214' as `0x${string}`,
-      lpBucketManager: '0x4240d7DE693BDAfEeE6E44F1C8d3811A38B36669' as `0x${string}`,
-      threeGatesRiskManager: '0xeBE3998F71a6Fe36aAC43F88c406d884c74C93e3' as `0x${string}`,
-      governanceRegistry: '0x9F4575071EB45704ff1e7B900497c097Fe35D4bA' as `0x${string}`,
-      usdc: '0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d' as `0x${string}`,
+      // New RiverBit MVP Deployment (2025-08-16 - Updated with new USDC)
+      riverbitCoreV2: '0xF307f083Ca4862C1093DA2283a3224822848581D' as `0x${string}`,
+      sAuthSettlement: '0x6CdB4745B98633a9f22E8F9De12b2178d806A8F0' as `0x${string}`,
+      lpBucketManager: '0xEc24A984247B24b75292182720359a265bDdAfd6' as `0x${string}`,
+      threeGatesRiskManager: '0x520Ff4c4896b5294852aB6362A88C5291B7C67e0' as `0x${string}`,
+      governanceRegistry: '0x6b9809F5496a8858F8446281b1d81E89F7a9225B' as `0x${string}`,
+      usdc: '0xa54cE3980863227b77308AA576589d5a8Be1cdB9' as `0x${string}`,
       // Legacy (deprecated)
       riverbitCore: '0x43bf3e410fd22e4cD1081E60F31600BDdC15ea96' as `0x${string}`,
     }

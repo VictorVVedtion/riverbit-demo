@@ -7,8 +7,9 @@ import ReferralPage from './components/pages/ReferralPage';
 import TradingSubsidyPage from './components/pages/TradingSubsidyPage';
 import DevPage from './components/pages/DevPage';
 import CommunityLeaderPage from './components/pages/CommunityLeaderPage';
-import TestNetPage from './components/pages/TestNetPage';
-import USDCFaucetPage from './components/pages/USDCFaucetPage';
+// Testnet components moved to archive
+// import TestNetPage from './components/pages/TestNetPage';
+// import USDCFaucetPage from './components/pages/USDCFaucetPage';
 import ShortcutHelp from './components/ShortcutHelp';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { Button } from './components/ui/button';
@@ -18,51 +19,20 @@ import RiverBitLogo from './components/RiverBitLogo';
 import { Toaster } from './components/ui/sonner';
 import { toast } from 'sonner';
 
-// 新增Web3组件
-import Web3Connection from './components/Web3Connection';
-import RiverPoolInterface from './components/RiverPoolInterface';
-import TradingInterface from './components/TradingInterface';
-import { web3Manager } from './utils/web3Utils';
-import RiverBitWeb3Provider, { useRiverBitWeb3 } from './providers/RiverBitWeb3Provider';
+// 新增Web3组件 - 使用现有的组件
+// import Web3Connection from './components/Web3Connection';
+import LiquidBentoTradingInterface from './components/LiquidBentoTradingInterface';
+// import TradingInterface from './components/TradingInterface';
+// Web3 providers moved to archive for frontend-focused development
+// import { web3Manager } from './utils/web3Utils';
+// import RiverBitWeb3Provider, { useRiverBitWeb3 } from './providers/RiverBitWeb3Provider';
 
 // 新用户体验组件 - 已禁用，用户不喜欢
 // import NewUserOnboarding from './components/onboarding/NewUserOnboarding';
 // import SmartTooltipSystem from './components/onboarding/SmartTooltipSystem';
 // import { useNewUserExperience } from './hooks/useNewUserExperience';
 
-// Real-time Trading Notifications Component
-const TradingNotifications = () => {
-  const { events } = useRiverBitWeb3();
-  const [processedEvents, setProcessedEvents] = React.useState(new Set());
-  
-  React.useEffect(() => {
-    // Process new events and show notifications
-    events.forEach(event => {
-      const eventKey = `${event.type}-${event.timestamp}-${event.txHash}`;
-      
-      if (!processedEvents.has(eventKey)) {
-        setProcessedEvents(prev => new Set([...prev, eventKey]));
-        
-        switch (event.type) {
-          case 'OrderPlaced':
-            toast.success('🎯 Order placed successfully!');
-            break;
-          case 'OrderExecuted':
-            toast.success('⚡ Order executed!');
-            break;
-          case 'PositionOpened':
-            toast.success('📈 Position opened!');
-            break;
-          case 'PositionClosed':
-            toast.success('💰 Position closed!');
-            break;
-        }
-      }
-    });
-  }, [events, processedEvents]);
-  
-  return null;
-};
+// Trading Notifications temporarily disabled for frontend demo
 
 const App = () => {
   // New user experience hook - 已禁用
@@ -138,11 +108,11 @@ const App = () => {
     // }
   };
 
-  // 处理新用户引导完成
-  const handleOnboardingComplete = () => {
-    setShowOnboarding(false);
-    markOnboardingComplete();
-  };
+  // 处理新用户引导完成 - 已禁用
+  // const handleOnboardingComplete = () => {
+  //   setShowOnboarding(false);
+  //   markOnboardingComplete();
+  // };
 
   // 检查是否显示引导 - 已禁用，用户不喜欢引导弹窗
   // useEffect(() => {
@@ -178,21 +148,28 @@ const App = () => {
 
   // Navigation component - Professional Exchange Navigation with River Theme
   const Navigation = () => {
-    const { 
-      isConnected: web3Connected, 
-      address: web3Address, 
-      accountInfo, 
-      connectWallet, 
-      disconnectWallet,
-      isValidNetwork,
-      switchToValidNetwork
-    } = useRiverBitWeb3();
+    // Web3 integration temporarily disabled for frontend development
+    const web3Connected = false;
+    const web3Address = '';
+    const accountInfo = null;
+    const isValidNetwork = true;
+    
+    const connectWallet = () => {
+      toast.info('Wallet connection temporarily disabled for frontend demo');
+    };
+    
+    const disconnectWallet = () => {
+      toast.info('Wallet already disconnected in frontend demo mode');
+    };
+    
+    const switchToValidNetwork = () => {
+      toast.info('Network switching temporarily disabled for frontend demo');
+    };
     
     return (
-    <nav className="h-20 river-glass-base river-glass-medium border-b border-river-surface/30 flex-shrink-0 relative z-50 shadow-xl overflow-hidden">
-      {/* 河流流动背景效果 */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-river-surface via-river-glow to-river-surface opacity-60 animate-pulse"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-river-surface/5 to-transparent animate-pulse opacity-30"></div>
+    <nav className="h-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/50 flex-shrink-0 relative z-50 shadow-xl overflow-hidden">
+      {/* 专业渐变底边效果 */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/50 to-transparent"></div>
       
       <div className="px-6 lg:px-8 h-full relative z-10">
         <div className="flex items-center justify-between h-full">
@@ -208,36 +185,22 @@ const App = () => {
               <div className="hidden md:block h-6 w-px bg-gradient-to-b from-transparent via-gray-600 to-transparent"></div>
             </div>
             
-            {/* Professional Navigation Menu - 精简至6个核心选项 */}
-            <div className="hidden lg:flex items-center space-x-2">
+            {/* Professional Navigation Menu - 统一专业色调体系 */}
+            <div className="hidden lg:flex items-center space-x-1">
               {[
-                { id: 'trading', label: 'Trade', icon: TrendingUp, primary: true },
-                { id: 'personal', label: 'Portfolio', icon: User, primary: false },
-                { id: 'riverpool', label: 'RiverPool', icon: Waves, featured: true },
-                { id: 'faucet', label: 'Faucet', icon: DollarSign, primary: false, highVisibility: true },
-                { id: 'referral', label: 'Earn', icon: Gift, primary: false, highVisibility: true },
-                { id: 'testnet', label: 'TestNet', special: true, icon: Sparkles, highlight: true },
-                { id: 'dev', label: 'More', special: true, icon: SettingsIcon },
+                { id: 'trading', label: 'Trade', icon: TrendingUp },
+                { id: 'personal', label: 'Portfolio', icon: User },
+                { id: 'riverpool', label: 'RiverPool', icon: Waves },
+                { id: 'referral', label: 'Earn', icon: Gift },
+                { id: 'dev', label: 'More', icon: SettingsIcon },
               ].map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 relative overflow-hidden river-ripple ${
-                    item.id === 'riverpool' ? 'data-riverpool-nav' : ''
-                  } ${
+                  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden ${
                     currentPage === item.id
-                      ? item.primary 
-                        ? 'river-button bg-gradient-to-r from-river-surface to-river-depth text-white shadow-lg river-glow'
-                        : item.featured
-                        ? 'river-button bg-gradient-to-r from-river-glow to-river-surface text-white shadow-lg river-glow'
-                        : item.highlight
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
-                        : 'river-glass-subtle text-white shadow-lg'
-                      : item.highVisibility
-                      ? 'text-river-glow hover:text-white hover:river-glass-subtle font-bold'
-                      : item.highlight
-                      ? 'text-purple-400 hover:text-white hover:bg-purple-600/20 border border-purple-500/30'
-                      : 'text-gray-300 hover:text-white hover:river-glass-subtle'
+                      ? 'bg-slate-800/80 text-white border border-slate-600/50 shadow-lg backdrop-blur-sm'
+                      : 'text-slate-300 hover:text-white hover:bg-slate-800/40 hover:backdrop-blur-sm'
                   }`}
                 >
                   <span className="flex items-center space-x-2">
@@ -290,7 +253,7 @@ const App = () => {
             ) : (
               <Button 
                 onClick={connectWallet}
-                className="river-button bg-gradient-to-r from-river-surface to-river-depth hover:from-river-glow hover:to-river-surface text-white px-6 py-2 font-semibold river-ripple"
+                className="bg-slate-800/60 hover:bg-slate-700/80 text-white border border-slate-600/50 hover:border-slate-500/70 px-4 py-2 font-medium transition-all duration-200 backdrop-blur-sm"
                 data-wallet-button
               >
                 <Wallet className="w-4 h-4 mr-2" />
@@ -356,16 +319,17 @@ const App = () => {
             web3Address={web3Address}
           />
         );
-      case 'faucet':
-        return <USDCFaucetPage />;
       case 'referral':
         return <ReferralPage />;
       case 'subsidy':
         return <TradingSubsidyPage />;
       case 'community':
         return <CommunityLeaderPage />;
-      case 'testnet':
-        return <TestNetPage />;
+      // Testnet routes moved to archive
+      // case 'faucet':
+      //   return <USDCFaucetPage />;
+      // case 'testnet':
+      //   return <TestNetPage />;
       case 'dev':
         return <DevPage />;
       default:
@@ -381,14 +345,13 @@ const App = () => {
     }
   };
 
-  // 统一的全屏布局 - 专业交易所风格
+  // 统一的全屏布局 - 专业交易所风格 (Frontend Demo Mode)
   return (
-    <RiverBitWeb3Provider>
-      <div className="h-screen bg-slate-950 flex flex-col">
-        <Navigation />
-        <div className="flex-1 overflow-y-auto bg-slate-950" data-navigation>
-          {renderCurrentPage()}
-        </div>
+    <div className="h-screen bg-slate-950 flex flex-col">
+      <Navigation />
+      <div className="flex-1 overflow-y-auto bg-slate-950" data-navigation>
+        {renderCurrentPage()}
+      </div>
 
         {/* 新用户引导 - 已禁用，用户不喜欢 */}
         {/* <NewUserOnboarding
@@ -413,10 +376,10 @@ const App = () => {
           open={showShortcutHelp} 
           onOpenChange={setShowShortcutHelp} 
         />
-        <TradingNotifications />
+        {/* <TradingNotifications /> */}
         <Toaster position="top-right" richColors />
       </div>
-    </RiverBitWeb3Provider>
+    </div>
   );
 };
 

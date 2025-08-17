@@ -1,0 +1,17 @@
+{
+  "network": "arbitrumSepolia",
+  "chainId": 421614,
+  "timestamp": 1755380489654,
+  "deployer": "0x97e05F0c5426b497f4E1f40679AAaa887D7A0511",
+  "contracts": {
+    "SimpleUSDCFaucet": "0x3E60A6c107229CA462DFfb873796651dde00FE8d"
+  },
+  "verification": {
+    "name": "Simple Test USDC",
+    "symbol": "USDC",
+    "decimals": "6",
+    "faucetEnabled": true,
+    "maxMint": "100000.0",
+    "cooldown": "300"
+  }
+}

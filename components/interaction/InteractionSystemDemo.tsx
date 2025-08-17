@@ -433,17 +433,17 @@ function InteractionSystemDemoContent() {
                     
                     <div className="flex justify-between items-center">
                       <span className="text-sm">滑动响应</span>
-                      <Badge variant="secondary">< 16ms</Badge>
+                      <Badge variant="secondary">&lt; 16ms</Badge>
                     </div>
                     
                     <div className="flex justify-between items-center">
                       <span className="text-sm">手势识别</span>
-                      <Badge variant="secondary">< 100ms</Badge>
+                      <Badge variant="secondary">&lt; 100ms</Badge>
                     </div>
                     
                     <div className="flex justify-between items-center">
                       <span className="text-sm">内存占用</span>
-                      <Badge variant="secondary">< 50MB</Badge>
+                      <Badge variant="secondary">&lt; 50MB</Badge>
                     </div>
                   </div>
 

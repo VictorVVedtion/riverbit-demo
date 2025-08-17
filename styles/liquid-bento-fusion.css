@@ -1,20 +1,20 @@
 /* ========== RiverBit Liquid Glass × Bento Grid Fusion System ========== */
 /* 统一液态玻璃系统，融合河流主题和Bento Grid模块化设计 */
 
-/* ==================== 河流主题配色系统 ==================== */
+/* ==================== Aurora河流主题配色系统 ==================== */
 :root {
-  /* RiverBit 河流蓝色系 - 品牌核心 */
-  --river-surface: #06b6d4;      /* 清澈水面蓝 */
-  --river-depth: #0891b2;        /* 深水蓝 */
-  --river-bed: #164e63;          /* 河床深蓝 */
-  --river-foam: #67e8f9;         /* 水花泡沫白 */
-  --river-glow: #22d3ee;         /* 河流发光效果 */
-  --river-mist: #cffafe;         /* 河流雾气 */
+  /* Aurora Professional 河流蓝色系 - 现代科技感 */
+  --river-surface: #58A6FF;      /* 现代蓝 - 主表面色 */
+  --river-depth: #0284C7;        /* 现代深蓝 - 深度层级 */
+  --river-bed: #075985;          /* 深层蓝 - 基础层 */
+  --river-foam: #BAE6FD;         /* 现代浅蓝 - 高亮色 */
+  --river-glow: #7DD3FC;         /* 青蓝 - 发光效果 */
+  --river-mist: #F0F9FF;         /* 极浅现代蓝 - 雾气效果 */
   
-  /* 交易专用色彩 */
-  --river-profit: #00ff88;       /* 明亮盈利绿 */
-  --river-loss: #ff0055;         /* 鲜艳亏损红 */
-  --river-neutral: #94a3b8;      /* 中性灰蓝 */
+  /* Aurora交易专用色彩 */
+  --river-profit: #3FB950;       /* 现代绿 - 盈利状态 */
+  --river-loss: #F85149;         /* 现代红 - 亏损状态 */
+  --river-neutral: #8B949E;      /* 现代灰 - 中性状态 */
   
   /* 液态玻璃强度分级 - 专业级增强 */
   --glass-blur-nano: blur(8px);      /* 轻微模糊 - 文字区域 */
@@ -30,7 +30,7 @@
   --glass-alpha-intense: 0.35;
   --glass-alpha-ultra: 0.45;
   
-  /* 河流动态渐变 */
+  /* Aurora河流动态渐变 */
   --river-gradient-flow: linear-gradient(
     135deg,
     var(--river-surface) 0%,
@@ -42,9 +42,9 @@
   
   --river-gradient-calm: linear-gradient(
     135deg,
-    rgba(6, 182, 212, 0.12) 0%,
-    rgba(8, 145, 178, 0.08) 50%,
-    rgba(22, 78, 99, 0.15) 100%
+    rgba(88, 166, 255, 0.08) 0%,
+    rgba(2, 132, 199, 0.06) 50%,
+    rgba(7, 89, 133, 0.10) 100%
   );
 }
 
@@ -59,11 +59,11 @@
   will-change: transform, opacity;
   backface-visibility: hidden;
   
-  /* 基础边框和阴影 */
-  border: 1px solid rgba(6, 182, 212, 0.2);
+  /* Aurora基础边框和阴影 */
+  border: 1px solid rgba(88, 166, 255, 0.2);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.12),
-    0 4px 16px rgba(6, 182, 212, 0.08),
+    0 4px 16px rgba(88, 166, 255, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -80,7 +80,7 @@
     rgba(255, 255, 255, 0.15) 0%,
     transparent 30%,
     transparent 70%,
-    rgba(6, 182, 212, 0.08) 100%
+    rgba(88, 166, 255, 0.08) 100%
   );
   opacity: 0.6;
   pointer-events: none;
@@ -114,13 +114,13 @@
 .river-glass-intense {
   background: linear-gradient(
     135deg,
-    rgba(6, 182, 212, var(--glass-alpha-intense)) 0%,
+    rgba(88, 166, 255, var(--glass-alpha-intense)) 0%,
     rgba(8, 145, 178, var(--glass-alpha-medium)) 50%,
     rgba(22, 78, 99, var(--glass-alpha-intense)) 100%
   );
   backdrop-filter: var(--glass-blur-intense);
   -webkit-backdrop-filter: var(--glass-blur-intense);
-  border-color: rgba(6, 182, 212, 0.3);
+  border-color: rgba(88, 166, 255, 0.3);
 }
 
 /* Ultra级别 - 展示和装饰用 */
@@ -129,7 +129,7 @@
   background-size: 400% 400%;
   backdrop-filter: var(--glass-blur-ultra);
   -webkit-backdrop-filter: var(--glass-blur-ultra);
-  border-color: rgba(6, 182, 212, 0.4);
+  border-color: rgba(88, 166, 255, 0.4);
   animation: riverFlow 8s ease-in-out infinite;
 }
 
@@ -139,21 +139,21 @@
 .river-glass-trading {
   background: linear-gradient(
     135deg,
-    rgba(6, 182, 212, 0.25) 0%,
+    rgba(88, 166, 255, 0.25) 0%,
     rgba(0, 255, 136, 0.15) 30%,
     rgba(15, 23, 42, 0.35) 70%,
-    rgba(6, 182, 212, 0.2) 100%
+    rgba(88, 166, 255, 0.2) 100%
   );
   backdrop-filter: var(--glass-blur-intense);
   -webkit-backdrop-filter: var(--glass-blur-intense);
-  border: 1px solid rgba(6, 182, 212, 0.4);
+  border: 1px solid rgba(88, 166, 255, 0.4);
   
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.25),
-    0 12px 40px rgba(6, 182, 212, 0.2),
+    0 12px 40px rgba(88, 166, 255, 0.2),
     0 6px 20px rgba(0, 255, 136, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 -1px 0 rgba(6, 182, 212, 0.2);
+    inset 0 -1px 0 rgba(88, 166, 255, 0.2);
 }
 
 /* 订单簿专用 */
@@ -171,16 +171,16 @@
   background: linear-gradient(
     135deg,
     rgba(15, 23, 42, 0.6) 0%,
-    rgba(6, 182, 212, 0.12) 50%,
+    rgba(88, 166, 255, 0.12) 50%,
     rgba(15, 23, 42, 0.7) 100%
   );
   backdrop-filter: var(--glass-blur-medium);
   -webkit-backdrop-filter: var(--glass-blur-medium);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  border: 1px solid rgba(88, 166, 255, 0.3);
   
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.2),
-    0 8px 32px rgba(6, 182, 212, 0.15),
+    0 8px 32px rgba(59, 130, 246, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   
   /* 确保图表清晰度 */
@@ -192,7 +192,7 @@
 .river-glass-ai {
   background: linear-gradient(
     135deg,
-    rgba(6, 182, 212, 0.2) 0%,
+    rgba(88, 166, 255, 0.2) 0%,
     rgba(0, 255, 136, 0.12) 30%,
     rgba(34, 211, 238, 0.15) 70%,
     rgba(15, 23, 42, 0.3) 100%
@@ -204,7 +204,7 @@
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.2),
     0 8px 32px rgba(34, 211, 238, 0.15),
-    0 0 40px rgba(6, 182, 212, 0.1),
+    0 0 40px rgba(88, 166, 255, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -363,7 +363,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(6, 182, 212, 0.3),
+    rgba(88, 166, 255, 0.3),
     rgba(34, 211, 238, 0.2),
     transparent
   );
@@ -387,7 +387,7 @@
   
   box-shadow: 
     0 25px 80px rgba(0, 0, 0, 0.25),
-    0 12px 40px rgba(6, 182, 212, 0.2),
+    0 12px 40px rgba(88, 166, 255, 0.2),
     0 6px 20px rgba(34, 211, 238, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
@@ -402,7 +402,7 @@
 .river-glow {
   box-shadow: 
     0 16px 48px rgba(0, 0, 0, 0.15),
-    0 8px 24px rgba(6, 182, 212, 0.25),
+    0 8px 24px rgba(59, 130, 246, 0.25),
     0 0 48px rgba(34, 211, 238, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
@@ -476,13 +476,13 @@
   0%, 100% {
     box-shadow: 
       0 16px 48px rgba(0, 0, 0, 0.15),
-      0 8px 24px rgba(6, 182, 212, 0.2),
+      0 8px 24px rgba(88, 166, 255, 0.2),
       0 0 48px rgba(34, 211, 238, 0.1);
   }
   50% {
     box-shadow: 
       0 20px 60px rgba(0, 0, 0, 0.2),
-      0 12px 32px rgba(6, 182, 212, 0.3),
+      0 12px 32px rgba(88, 166, 255, 0.3),
       0 0 60px rgba(34, 211, 238, 0.2);
   }
 }
@@ -650,7 +650,7 @@
 
   /* 移动端触摸反馈 */
   .touch-feedback {
-    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+    -webkit-tap-highlight-color: rgba(88, 166, 255, 0.2);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
@@ -726,7 +726,7 @@
 /* 自定义滚动条 - iOS风格玻璃效果 */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(6, 182, 212, 0.4) transparent;
+  scrollbar-color: rgba(88, 166, 255, 0.4) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -738,22 +738,22 @@
   background: rgba(15, 23, 42, 0.2);
   border-radius: 8px;
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(88, 166, 255, 0.1);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: linear-gradient(
     135deg,
-    rgba(6, 182, 212, 0.6) 0%,
+    rgba(88, 166, 255, 0.6) 0%,
     rgba(34, 211, 238, 0.4) 50%,
-    rgba(6, 182, 212, 0.6) 100%
+    rgba(88, 166, 255, 0.6) 100%
   );
   border-radius: 8px;
-  border: 1px solid rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(88, 166, 255, 0.2);
   backdrop-filter: blur(16px);
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.2),
-    0 0 16px rgba(6, 182, 212, 0.1),
+    0 0 16px rgba(88, 166, 255, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
@@ -761,19 +761,19 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     135deg,
-    rgba(6, 182, 212, 0.8) 0%,
+    rgba(88, 166, 255, 0.8) 0%,
     rgba(34, 211, 238, 0.6) 50%,
-    rgba(6, 182, 212, 0.8) 100%
+    rgba(88, 166, 255, 0.8) 100%
   );
   box-shadow: 
     0 4px 16px rgba(0, 0, 0, 0.3),
-    0 0 24px rgba(6, 182, 212, 0.2),
+    0 0 24px rgba(88, 166, 255, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:active {
-  background: rgba(6, 182, 212, 0.9);
+  background: rgba(88, 166, 255, 0.9);
   transform: scale(0.95);
 }
 
@@ -784,7 +784,7 @@
 /* 超细滚动条变体 - 用于数据密集区域 */
 .custom-scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
+  scrollbar-color: rgba(88, 166, 255, 0.3) transparent;
 }
 
 .custom-scrollbar-thin::-webkit-scrollbar {
@@ -798,14 +798,14 @@
 }
 
 .custom-scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgba(6, 182, 212, 0.5);
+  background: rgba(88, 166, 255, 0.5);
   border-radius: 4px;
   backdrop-filter: blur(8px);
   transition: all 0.2s ease;
 }
 
 .custom-scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgba(6, 182, 212, 0.7);
+  background: rgba(88, 166, 255, 0.7);
 }
 
 /* 隐藏滚动条但保持功能 */
@@ -824,7 +824,7 @@
 .river-logo-container {
   background: linear-gradient(
     135deg,
-    rgba(6, 182, 212, 0.2) 0%,
+    rgba(88, 166, 255, 0.2) 0%,
     rgba(34, 211, 238, 0.15) 50%,
     rgba(103, 232, 249, 0.1) 100%
   );
@@ -849,7 +849,7 @@
   background-size: 150% 150%;
   border-opacity: 0.8;
   box-shadow: 
-    0 12px 40px rgba(6, 182, 212, 0.25),
+    0 12px 40px rgba(59, 130, 246, 0.25),
     0 0 30px rgba(34, 211, 238, 0.2);
 }
 

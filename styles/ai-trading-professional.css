@@ -1,9 +1,10 @@
 /* ========================================================================
                     RIVERBIT AI TRADING ASSISTANT PROFESSIONAL UI
 ========================================================================
-World-class trading AI interface matching GMX/Hyperliquid standards
-Version: 2.0 Professional
+World-class desktop trading AI interface matching GMX/Hyperliquid standards
+Version: 3.0 Desktop Professional Edition
 Author: RiverBit UI/UX Team
+Optimized for: Desktop/Laptop screens (1024px+)
 ======================================================================== */
 
 /* ==================== PROFESSIONAL AI CONTAINER ==================== */
@@ -36,6 +37,77 @@ Author: RiverBit UI/UX Team
     var(--river-glass-base) 100%);
   border-bottom: 1px solid var(--river-glass-border);
   backdrop-filter: blur(16px);
+}
+
+/* 紧凑模式头部 */
+.ai-trading-professional.compact-mode .ai-trading-header {
+  padding: 8px 12px;
+  min-height: 40px;
+}
+
+.ai-trading-professional.compact-mode .ai-brand-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.ai-trading-professional.compact-mode .ai-brand-title {
+  font-size: 14px;
+}
+
+.ai-trading-professional.compact-mode .ai-brand-subtitle {
+  font-size: 11px;
+}
+
+/* 紧凑模式快速操作 */
+.ai-trading-professional.compact-mode .ai-quick-actions {
+  padding: 8px 12px;
+}
+
+.ai-trading-professional.compact-mode .ai-quick-actions-grid {
+  gap: 8px;
+}
+
+.ai-trading-professional.compact-mode .ai-quick-action-card {
+  padding: 8px;
+  min-height: 60px;
+}
+
+.ai-trading-professional.compact-mode .ai-quick-action-title {
+  font-size: 12px;
+}
+
+.ai-trading-professional.compact-mode .ai-quick-action-description {
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+/* 紧凑模式消息流 */
+.ai-trading-professional.compact-mode .ai-message-flow {
+  padding: 8px 12px;
+}
+
+.ai-trading-professional.compact-mode .ai-message-item {
+  margin-bottom: 8px;
+}
+
+.ai-trading-professional.compact-mode .ai-message-avatar {
+  width: 28px;
+  height: 28px;
+}
+
+.ai-trading-professional.compact-mode .ai-message-text {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* 紧凑模式输入区域 */
+.ai-trading-professional.compact-mode .ai-input-container {
+  padding: 8px 12px;
+}
+
+.ai-trading-professional.compact-mode .ai-input-field {
+  min-height: 36px;
+  font-size: 13px;
 }
 
 .ai-header-brand {

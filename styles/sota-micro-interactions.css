@@ -1,0 +1,960 @@
+/* ========== SOTA MICRO-INTERACTIONS ANIMATION SYSTEM ========== */
+/* State-of-the-Art 60fps Performance Micro-interaction System */
+/* Designed for professional trading interfaces with ultra-smooth animations */
+
+/* ========== PERFORMANCE OPTIMIZATION FOUNDATION ========== */
+/* CSS custom properties for consistent animation timing and easing */
+:root {
+  /* 60fps Performance Timing System */
+  --animation-ultra-fast: 150ms;      /* Ultra-responsive micro-interactions */
+  --animation-fast: 200ms;            /* Button clicks, hover states */
+  --animation-normal: 300ms;          /* Standard UI transitions */
+  --animation-slow: 500ms;            /* Complex state changes */
+  --animation-extra-slow: 800ms;      /* Data animations, celebrations */
+  
+  /* Professional Easing Functions - GPU Optimized */
+  --easing-sharp: cubic-bezier(0.4, 0, 0.2, 1);              /* Material Design Sharp */
+  --easing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);     /* Smooth transitions */
+  --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);   /* Playful bounce */
+  --easing-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Elastic feel */
+  --easing-expo: cubic-bezier(0.16, 1, 0.3, 1);              /* Exponential ease */
+  --easing-back: cubic-bezier(0.34, 1.56, 0.64, 1);          /* Back ease */
+  
+  /* Professional Trading Animation Presets */
+  --price-flash-duration: 600ms;
+  --order-success-duration: 1200ms;
+  --position-change-duration: 800ms;
+  --data-update-duration: 300ms;
+  --loading-animation-duration: 1500ms;
+  
+  /* GPU Acceleration Properties */
+  --will-change-transform: transform;
+  --will-change-opacity: opacity;
+  --will-change-auto: auto;
+  
+  /* Performance Transform Base */
+  --transform-gpu: translateZ(0);
+  --backface-visibility: hidden;
+  --perspective: 1000px;
+}
+
+/* ========== MICRO-INTERACTION BASE CLASSES ========== */
+/* Foundation classes for all micro-interactions */
+
+.micro-interactive {
+  will-change: var(--will-change-transform);
+  transform: var(--transform-gpu);
+  backface-visibility: var(--backface-visibility);
+  transition: all var(--animation-fast) var(--easing-sharp);
+}
+
+/* ========== PROFESSIONAL TRADING CARD ANIMATIONS ========== */
+/* SOTA Position card micro-interactions */
+
+.professional-trading-card {
+  will-change: transform, box-shadow, border-color;
+  transform: translateZ(0);
+  transition: all var(--animation-normal) var(--easing-smooth);
+}
+
+.professional-trading-card:hover {
+  transform: translateY(-1px) translateZ(0);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 
+              0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Position card state animations */
+.professional-trading-card.position-profit-micro {
+  animation: position-profit-pulse var(--position-change-duration) var(--easing-smooth);
+  border-color: var(--trading-green-500) !important;
+}
+
+.professional-trading-card.position-loss-micro {
+  animation: position-loss-pulse var(--position-change-duration) var(--easing-smooth);
+  border-color: var(--trading-red-500) !important;
+}
+
+@keyframes position-profit-pulse {
+  0% { 
+    background-color: rgba(16, 185, 129, 0.1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% { 
+    background-color: rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.1);
+  }
+  100% { 
+    background-color: rgba(16, 185, 129, 0.05);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes position-loss-pulse {
+  0% { 
+    background-color: rgba(239, 68, 68, 0.1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% { 
+    background-color: rgba(239, 68, 68, 0.2);
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.1);
+  }
+  100% { 
+    background-color: rgba(239, 68, 68, 0.05);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Real-time data update indicators */
+.trading-data-updating {
+  position: relative;
+  overflow: hidden;
+}
+
+.trading-data-updating::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--trading-update-indicator) 50%, 
+    transparent 100%
+  );
+  animation: data-update-sweep var(--data-update-duration) var(--easing-smooth);
+  z-index: 10;
+}
+
+@keyframes data-update-sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Price flash animations */
+.trading-flash-positive {
+  animation: price-flash-positive var(--price-flash-duration) var(--easing-smooth);
+}
+
+.trading-flash-negative {
+  animation: price-flash-negative var(--price-flash-duration) var(--easing-smooth);
+}
+
+@keyframes price-flash-positive {
+  0% { background-color: rgba(16, 185, 129, 0.3); }
+  100% { background-color: transparent; }
+}
+
+@keyframes price-flash-negative {
+  0% { background-color: rgba(239, 68, 68, 0.3); }
+  100% { background-color: transparent; }
+}
+
+/* Checkbox micro-interactions */
+input[type="checkbox"] {
+  transition: all var(--animation-fast) var(--easing-sharp);
+  cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+  transform: scale(1.1);
+}
+
+input[type="checkbox"]:checked {
+  animation: checkbox-success var(--animation-normal) var(--easing-bounce);
+}
+
+@keyframes checkbox-success {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Spinner micro-interaction */
+.spinner-micro {
+  animation: spin var(--loading-animation-duration) linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Badge animations */
+.badge-micro-grow {
+  animation: badge-grow var(--animation-normal) var(--easing-bounce);
+}
+
+@keyframes badge-grow {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Tab transition micro-interaction */
+.tab-switch-micro {
+  animation: tab-switch var(--animation-normal) var(--easing-smooth);
+}
+
+@keyframes tab-switch {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Advanced button micro-interactions */
+.btn-micro-trading {
+  position: relative;
+  overflow: hidden;
+  transition: all var(--animation-fast) var(--easing-sharp);
+}
+
+.btn-micro-trading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width var(--animation-normal) var(--easing-smooth), 
+              height var(--animation-normal) var(--easing-smooth);
+}
+
+.btn-micro-trading:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Micro hover and active states */
+.micro-hover-scale:hover {
+  transform: scale(1.02) translateZ(0);
+}
+
+.micro-active-press:active {
+  transform: scale(0.98) translateZ(0);
+}
+
+/* Progress indicators */
+.progress-micro {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-micro::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(59, 130, 246, 0) 0%, 
+    rgba(59, 130, 246, 0.5) 50%, 
+    rgba(59, 130, 246, 0) 100%
+  );
+  animation: progress-sweep 2s linear infinite;
+}
+
+@keyframes progress-sweep {
+  0% { width: 0%; transform: translateX(-100%); }
+  50% { width: 100%; }
+  100% { width: 0%; transform: translateX(100%); }
+}
+
+.micro-interactive-precise {
+  will-change: transform, opacity, box-shadow;
+  transform: var(--transform-gpu);
+  backface-visibility: var(--backface-visibility);
+  transition: 
+    transform var(--animation-ultra-fast) var(--easing-sharp),
+    opacity var(--animation-ultra-fast) var(--easing-sharp),
+    box-shadow var(--animation-normal) var(--easing-smooth);
+}
+
+.micro-hover-lift {
+  transition: transform var(--animation-fast) var(--easing-smooth);
+}
+
+.micro-hover-lift:hover {
+  transform: translateY(-2px) var(--transform-gpu);
+}
+
+.micro-hover-scale {
+  transition: transform var(--animation-ultra-fast) var(--easing-sharp);
+}
+
+.micro-hover-scale:hover {
+  transform: scale(1.02) var(--transform-gpu);
+}
+
+.micro-active-press {
+  transition: transform var(--animation-ultra-fast) var(--easing-sharp);
+}
+
+.micro-active-press:active {
+  transform: scale(0.98) var(--transform-gpu);
+}
+
+/* ========== TRADING-SPECIFIC MICRO-INTERACTIONS ========== */
+
+/* Button Interaction System */
+.btn-micro-trading {
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow, background-color;
+  transform: var(--transform-gpu);
+  transition:
+    transform var(--animation-ultra-fast) var(--easing-sharp),
+    box-shadow var(--animation-normal) var(--easing-smooth),
+    background-color var(--animation-fast) var(--easing-sharp);
+}
+
+.btn-micro-trading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width var(--animation-normal) var(--easing-expo), 
+              height var(--animation-normal) var(--easing-expo);
+  pointer-events: none;
+}
+
+.btn-micro-trading:hover {
+  transform: translateY(-1px) var(--transform-gpu);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-micro-trading:active {
+  transform: translateY(0) scale(0.98) var(--transform-gpu);
+}
+
+.btn-micro-trading:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Buy/Sell Button Specific Animations */
+.btn-buy-micro {
+  background: linear-gradient(135deg, #10b981 0%, #16a34a 100%);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-buy-micro:hover {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.btn-sell-micro {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-sell-micro:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+/* Price Flash Animations - 60fps Optimized */
+@keyframes price-flash-green-micro {
+  0% { 
+    background-color: transparent;
+    transform: scale(1) var(--transform-gpu);
+    box-shadow: none;
+  }
+  15% { 
+    background-color: rgba(16, 185, 129, 0.2);
+    transform: scale(1.01) var(--transform-gpu);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+  }
+  30% { 
+    background-color: rgba(16, 185, 129, 0.35);
+    transform: scale(1.02) var(--transform-gpu);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+  }
+  60% { 
+    background-color: rgba(16, 185, 129, 0.15);
+    transform: scale(1.01) var(--transform-gpu);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1) var(--transform-gpu);
+    box-shadow: none;
+  }
+}
+
+@keyframes price-flash-red-micro {
+  0% { 
+    background-color: transparent;
+    transform: scale(1) var(--transform-gpu);
+    box-shadow: none;
+  }
+  15% { 
+    background-color: rgba(239, 68, 68, 0.2);
+    transform: scale(1.01) var(--transform-gpu);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  }
+  30% { 
+    background-color: rgba(239, 68, 68, 0.35);
+    transform: scale(1.02) var(--transform-gpu);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+  }
+  60% { 
+    background-color: rgba(239, 68, 68, 0.15);
+    transform: scale(1.01) var(--transform-gpu);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1) var(--transform-gpu);
+    box-shadow: none;
+  }
+}
+
+.price-flash-green-micro {
+  animation: price-flash-green-micro var(--price-flash-duration) var(--easing-smooth);
+  border-radius: 8px;
+}
+
+.price-flash-red-micro {
+  animation: price-flash-red-micro var(--price-flash-duration) var(--easing-smooth);
+  border-radius: 8px;
+}
+
+/* ========== DATA VISUALIZATION ANIMATIONS ========== */
+
+/* Portfolio Value Change Animation */
+@keyframes portfolio-value-increase {
+  0% { 
+    transform: scale(1) var(--transform-gpu);
+    color: inherit;
+  }
+  50% { 
+    transform: scale(1.05) var(--transform-gpu);
+    color: #10b981;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  }
+  100% { 
+    transform: scale(1) var(--transform-gpu);
+    color: #10b981;
+    text-shadow: none;
+  }
+}
+
+@keyframes portfolio-value-decrease {
+  0% { 
+    transform: scale(1) var(--transform-gpu);
+    color: inherit;
+  }
+  50% { 
+    transform: scale(1.05) var(--transform-gpu);
+    color: #ef4444;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  }
+  100% { 
+    transform: scale(1) var(--transform-gpu);
+    color: #ef4444;
+    text-shadow: none;
+  }
+}
+
+.portfolio-increase-micro {
+  animation: portfolio-value-increase var(--animation-slow) var(--easing-bounce);
+}
+
+.portfolio-decrease-micro {
+  animation: portfolio-value-decrease var(--animation-slow) var(--easing-bounce);
+}
+
+/* Position Change Animations */
+@keyframes position-profit-celebration {
+  0% { 
+    transform: scale(1) var(--transform-gpu);
+    filter: brightness(1);
+  }
+  25% { 
+    transform: scale(1.03) var(--transform-gpu);
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+  50% { 
+    transform: scale(1.05) var(--transform-gpu);
+    filter: brightness(1.2);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+  }
+  75% { 
+    transform: scale(1.02) var(--transform-gpu);
+    filter: brightness(1.1);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  }
+  100% { 
+    transform: scale(1) var(--transform-gpu);
+    filter: brightness(1);
+    box-shadow: none;
+  }
+}
+
+@keyframes position-loss-warning {
+  0% { 
+    transform: scale(1) var(--transform-gpu);
+    filter: brightness(1);
+  }
+  25% { 
+    transform: scale(1.02) var(--transform-gpu);
+    filter: brightness(1.05);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+  }
+  50% { 
+    transform: scale(1.03) var(--transform-gpu);
+    filter: brightness(1.1);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+  }
+  75% { 
+    transform: scale(1.01) var(--transform-gpu);
+    filter: brightness(1.05);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.25);
+  }
+  100% { 
+    transform: scale(1) var(--transform-gpu);
+    filter: brightness(1);
+    box-shadow: none;
+  }
+}
+
+.position-profit-micro {
+  animation: position-profit-celebration var(--order-success-duration) var(--easing-bounce);
+}
+
+.position-loss-micro {
+  animation: position-loss-warning var(--position-change-duration) var(--easing-smooth);
+}
+
+/* ========== LOADING AND SKELETON ANIMATIONS ========== */
+
+/* SOTA Skeleton Shimmer */
+@keyframes skeleton-shimmer-micro {
+  0% {
+    background-position: -100% 0;
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    background-position: 100% 0;
+    opacity: 0.6;
+  }
+}
+
+.skeleton-micro {
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.1) 0%,
+    rgba(148, 163, 184, 0.2) 50%,
+    rgba(148, 163, 184, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer-micro var(--loading-animation-duration) ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* Pulse Loading Animation */
+@keyframes pulse-loading-micro {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1) var(--transform-gpu);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02) var(--transform-gpu);
+  }
+}
+
+.pulse-loading-micro {
+  animation: pulse-loading-micro 2s var(--easing-smooth) infinite;
+}
+
+/* Spinner Animation - 60fps Optimized */
+@keyframes spinner-micro {
+  0% {
+    transform: rotate(0deg) var(--transform-gpu);
+  }
+  100% {
+    transform: rotate(360deg) var(--transform-gpu);
+  }
+}
+
+.spinner-micro {
+  animation: spinner-micro 1s linear infinite;
+  will-change: transform;
+}
+
+/* ========== MODAL AND PAGE TRANSITION ANIMATIONS ========== */
+
+/* Modal Enter/Exit Animations */
+@keyframes modal-enter-micro {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px) var(--transform-gpu);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) var(--transform-gpu);
+    filter: blur(0);
+  }
+}
+
+@keyframes modal-exit-micro {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0) var(--transform-gpu);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px) var(--transform-gpu);
+    filter: blur(3px);
+  }
+}
+
+.modal-enter-micro {
+  animation: modal-enter-micro var(--animation-normal) var(--easing-expo);
+}
+
+.modal-exit-micro {
+  animation: modal-exit-micro var(--animation-fast) var(--easing-sharp);
+}
+
+/* Backdrop Animation */
+@keyframes backdrop-enter-micro {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+.backdrop-enter-micro {
+  animation: backdrop-enter-micro var(--animation-normal) var(--easing-smooth);
+}
+
+/* ========== TAB AND NAVIGATION ANIMATIONS ========== */
+
+/* Tab Switch Animation */
+@keyframes tab-switch-micro {
+  0% {
+    opacity: 0;
+    transform: translateX(10px) var(--transform-gpu);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) var(--transform-gpu);
+  }
+}
+
+.tab-switch-micro {
+  animation: tab-switch-micro var(--animation-fast) var(--easing-smooth);
+}
+
+/* Tab Indicator Animation */
+@keyframes tab-indicator-slide {
+  0% {
+    transform: translateX(var(--start-position, 0)) var(--transform-gpu);
+  }
+  100% {
+    transform: translateX(var(--end-position, 0)) var(--transform-gpu);
+  }
+}
+
+.tab-indicator-micro {
+  transition: transform var(--animation-normal) var(--easing-expo);
+}
+
+/* ========== FORM INTERACTION ANIMATIONS ========== */
+
+/* Input Focus Animation */
+.input-micro {
+  position: relative;
+  transition: all var(--animation-fast) var(--easing-smooth);
+}
+
+.input-micro::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary, #3b82f6);
+  transition: all var(--animation-normal) var(--easing-expo);
+  transform: translateX(-50%);
+}
+
+.input-micro:focus-within::before {
+  width: 100%;
+}
+
+.input-micro:focus-within {
+  transform: translateY(-1px) var(--transform-gpu);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+}
+
+/* Checkbox/Toggle Animations */
+@keyframes checkbox-check-micro {
+  0% {
+    transform: scale(0) rotate(45deg) var(--transform-gpu);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg) var(--transform-gpu);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(45deg) var(--transform-gpu);
+    opacity: 1;
+  }
+}
+
+.checkbox-check-micro {
+  animation: checkbox-check-micro var(--animation-fast) var(--easing-bounce);
+}
+
+/* ========== ORDER BOOK SPECIFIC ANIMATIONS ========== */
+
+/* Order Book Row Hover */
+.orderbook-row-micro {
+  transition: all var(--animation-ultra-fast) var(--easing-sharp);
+  will-change: transform, background-color, box-shadow;
+}
+
+.orderbook-row-micro:hover {
+  transform: translateX(2px) var(--transform-gpu);
+  background-color: rgba(59, 130, 246, 0.05);
+  box-shadow: 2px 0 8px rgba(59, 130, 246, 0.1);
+}
+
+/* Depth Chart Animation */
+@keyframes depth-bar-grow {
+  0% {
+    width: 0;
+    opacity: 0.5;
+  }
+  100% {
+    width: var(--target-width, 100%);
+    opacity: 1;
+  }
+}
+
+.depth-bar-micro {
+  animation: depth-bar-grow var(--animation-slow) var(--easing-expo);
+}
+
+/* Price Level Click Feedback */
+@keyframes price-click-feedback {
+  0% {
+    background-color: rgba(59, 130, 246, 0.3);
+    transform: scale(1) var(--transform-gpu);
+  }
+  50% {
+    background-color: rgba(59, 130, 246, 0.6);
+    transform: scale(1.02) var(--transform-gpu);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1) var(--transform-gpu);
+    box-shadow: none;
+  }
+}
+
+.price-click-micro {
+  animation: price-click-feedback var(--animation-normal) var(--easing-bounce);
+}
+
+/* ========== RESPONSIVE PERFORMANCE OPTIMIZATIONS ========== */
+
+/* Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .micro-interactive,
+  .micro-interactive-precise,
+  .micro-hover-lift,
+  .micro-hover-scale,
+  .micro-active-press {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .btn-micro-trading::before {
+    display: none;
+  }
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  :root {
+    --animation-ultra-fast: 100ms;
+    --animation-fast: 150ms;
+    --animation-normal: 200ms;
+    --animation-slow: 300ms;
+    --animation-extra-slow: 500ms;
+  }
+  
+  .mobile-reduce-animations {
+    animation-duration: calc(var(--animation-duration, 300ms) * 0.7) !important;
+    transition-duration: calc(var(--transition-duration, 300ms) * 0.7) !important;
+  }
+}
+
+/* High refresh rate optimization */
+@media (min-resolution: 120dpi) {
+  :root {
+    --animation-ultra-fast: 120ms;
+    --animation-fast: 180ms;
+    --animation-normal: 250ms;
+  }
+}
+
+/* ========== UTILITY CLASSES ========== */
+
+/* Animation Control Classes */
+.animate-pause {
+  animation-play-state: paused !important;
+}
+
+.animate-play {
+  animation-play-state: running !important;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+.transform-gpu {
+  transform: var(--transform-gpu);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Stagger Animation Delays */
+.stagger-micro-1 { animation-delay: 50ms; }
+.stagger-micro-2 { animation-delay: 100ms; }
+.stagger-micro-3 { animation-delay: 150ms; }
+.stagger-micro-4 { animation-delay: 200ms; }
+.stagger-micro-5 { animation-delay: 250ms; }
+.stagger-micro-6 { animation-delay: 300ms; }
+
+/* Performance Monitoring Classes */
+.performance-critical {
+  will-change: transform, opacity;
+  transform: var(--transform-gpu);
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+.gpu-layer {
+  transform: var(--transform-gpu);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Debug Animation Performance */
+.debug-animations {
+  outline: 2px solid red !important;
+  animation-iteration-count: infinite !important;
+}
+
+/* ========== ADVANCED MICRO-INTERACTION PATTERNS ========== */
+
+/* Ripple Effect for Touch Interactions */
+.ripple-micro {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-micro::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width var(--animation-normal) var(--easing-expo),
+              height var(--animation-normal) var(--easing-expo),
+              opacity var(--animation-normal) var(--easing-expo);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ripple-micro:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+/* Success Celebration Animation */
+@keyframes success-celebration-micro {
+  0% {
+    transform: scale(1) var(--transform-gpu);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) var(--transform-gpu);
+    filter: brightness(1.2) hue-rotate(90deg);
+  }
+  50% {
+    transform: scale(1.1) var(--transform-gpu);
+    filter: brightness(1.4) hue-rotate(180deg);
+  }
+  75% {
+    transform: scale(1.05) var(--transform-gpu);
+    filter: brightness(1.2) hue-rotate(270deg);
+  }
+  100% {
+    transform: scale(1) var(--transform-gpu);
+    filter: brightness(1) hue-rotate(360deg);
+  }
+}
+
+.success-celebration-micro {
+  animation: success-celebration-micro 1s var(--easing-bounce);
+}
+
+/* Error Shake Animation */
+@keyframes error-shake-micro {
+  0%, 100% {
+    transform: translateX(0) var(--transform-gpu);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px) var(--transform-gpu);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px) var(--transform-gpu);
+  }
+}
+
+.error-shake-micro {
+  animation: error-shake-micro 0.5s var(--easing-sharp);
+}

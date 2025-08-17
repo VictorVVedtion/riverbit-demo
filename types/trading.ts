@@ -234,36 +234,32 @@ export interface CandlestickData {
   trades: number;
 }
 
-export default {
-  // 类型导出
-  type TradeSide,
-  type TradeType,
-  type MarginMode,
-  type OrderStatus,
-  type TransactionStatus,
-  
-  // 接口导出
-  type AccountInfo,
-  type TradeData,
-  type TradeExecutionResult,
-  type TradeState,
-  type PriceData,
-  type Position,
-  type Order,
-  type TradeHistory,
-  type RiskParameters,
-  type Web3Error,
-  type ContractCallParams,
-  type ContractEventLog,
-  type TradeExecutionParams,
-  type TradeConfirmationData,
-  type MarketData,
-  type OrderBookData,
-  type CandlestickData,
-  
-  // 回调函数类型
-  type TradeCompleteCallback,
-  type TradeErrorCallback,
-  type BalanceUpdateCallback,
-  type PositionUpdateCallback,
+// 导出所有类型和接口
+export {
+  TradeSide,
+  TradeType,
+  MarginMode,
+  OrderStatus,
+  TransactionStatus,
+  AccountInfo,
+  TradeData,
+  TradeExecutionResult,
+  TradeState,
+  PriceData,
+  Position,
+  Order,
+  TradeHistory,
+  RiskParameters,
+  Web3Error,
+  ContractCallParams,
+  ContractEventLog,
+  TradeExecutionParams,
+  TradeConfirmationData,
+  MarketData,
+  OrderBookData,
+  CandlestickData,
+  TradeCompleteCallback,
+  TradeErrorCallback,
+  BalanceUpdateCallback,
+  PositionUpdateCallback,
 };

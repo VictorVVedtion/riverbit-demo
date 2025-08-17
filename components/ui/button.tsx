@@ -5,8 +5,8 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "./utils";
 
 const buttonVariants = cva(
-  // River Base Button Classes - 2024 Enhanced Professional DEX Standard with Natural Flow
-  "river-btn natural-button inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 ease-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none transform-gpu will-change-transform relative overflow-hidden natural-interactive",
+  // River Base Button Classes - Professional Trading Optimized for Performance
+  "river-btn natural-button inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-200 ease-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none transform-gpu will-change-transform relative overflow-hidden natural-interactive",
   {
     variants: {
       variant: {
@@ -54,7 +54,7 @@ const buttonVariants = cva(
   },
 );
 
-function Button({
+const Button = React.memo(function Button({
   className,
   variant,
   size,
@@ -73,6 +73,6 @@ function Button({
       {...props}
     />
   );
-}
+});
 
 export { Button, buttonVariants };

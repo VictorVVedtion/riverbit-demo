@@ -23,6 +23,13 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true,
+    watch: {
+      ignored: [
+        '**/contracts/**',
+        '**/node_modules/**',
+        '**/.git/**'
+      ]
+    }
   },
   assetsInclude: ['**/*.svg'],
   resolve: {

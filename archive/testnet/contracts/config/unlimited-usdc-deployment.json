@@ -1,0 +1,20 @@
+{
+  "timestamp": "2025-08-16T23:06:13.924Z",
+  "network": "arbitrum-sepolia",
+  "deployer": "0x97e05F0c5426b497f4E1f40679AAaa887D7A0511",
+  "contracts": {
+    "UnlimitedUSDCFaucet": {
+      "address": "0x56bbaEb426980c930dd1b8476aF9fA4F0B983e33",
+      "name": "Unlimited Test USDC",
+      "symbol": "USDC",
+      "decimals": 6,
+      "features": [
+        "无限制mint",
+        "无冷却时间",
+        "无数量限制",
+        "任何地址可用",
+        "便捷函数支持"
+      ]
+    }
+  }
+}

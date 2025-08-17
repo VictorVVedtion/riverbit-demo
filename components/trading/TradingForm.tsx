@@ -52,7 +52,7 @@ interface TradingFormProps {
   onTradeError: (error: string) => void;
 }
 
-export default function TradingForm({
+const TradingForm = React.memo(function TradingForm({
   orderSide, setOrderSide,
   orderType, setOrderType,
   leverage, setLeverage,
@@ -113,7 +113,7 @@ export default function TradingForm({
   return (
     <div className="flex-1 p-3 xl:p-4 space-y-2 xl:space-y-3 overflow-y-auto">
       {/* 专业账户信息面板 */}
-      <div className="bg-gradient-to-br from-surface-2/80 to-surface-3/60 backdrop-blur-sm rounded-lg p-3 xl:p-4 space-y-2 xl:space-y-3 border border-default/30 shadow-sm">
+      <div className="bg-gradient-to-br from-surface-2/80 to-surface-3/60 backdrop-blur-sm rounded-xl p-4 space-y-3 border border-default/30 shadow-lg hover:shadow-xl transition-all duration-300">
         <div className="flex justify-between items-center">
           <span className="text-sm text-secondary font-semibold flex items-center space-x-2">
             <DollarSign className="w-4 h-4" />
@@ -133,13 +133,13 @@ export default function TradingForm({
         </div>
         
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-surface-1/50 rounded-md p-2 border border-default/20">
+          <div className="bg-surface-1/50 rounded-lg p-3 border border-default/20 hover:border-profit/30 transition-all duration-200">
             <div className="text-secondary text-xs mb-1 font-medium">Available</div>
             <div className="font-bold text-profit text-base">
               ${(accountData.availableBalance || MOCK_ACCOUNT_DATA.AVAILABLE_BALANCE).toLocaleString()}
             </div>
           </div>
-          <div className="bg-surface-1/50 rounded-md p-2 border border-default/20">
+          <div className="bg-surface-1/50 rounded-lg p-3 border border-default/20 hover:border-loss/30 transition-all duration-200">
             <div className="text-secondary text-xs mb-1 font-medium">Used</div>
             <div className="font-bold text-loss text-base">
               ${(accountData.usedMargin || MOCK_ACCOUNT_DATA.USED_MARGIN).toLocaleString()}
@@ -258,21 +258,24 @@ export default function TradingForm({
 
       {/* 数量输入 */}
       <div>
-        <div className="text-xs text-muted mb-1">Size (USDT)</div>
+        <div className="text-sm text-secondary mb-2 font-medium flex items-center space-x-2">
+          <DollarSign className="w-4 h-4" />
+          <span>Size (USDT)</span>
+        </div>
         <Input
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="0.00"
-          className="h-7 text-xs bg-surface-2 border-default text-primary focus:border-river-blue transition-colors"
+          className="h-10 text-sm bg-surface-2/80 backdrop-blur-sm border-default/50 text-primary focus:border-river-blue focus:ring-2 focus:ring-river-blue/20 transition-all duration-200 rounded-lg font-medium"
         />
-        <div className="grid grid-cols-4 gap-1.5 mt-2">
+        <div className="grid grid-cols-4 gap-2 mt-3">
           {TRADING_CONFIG.PERCENTAGE_OPTIONS.map((percent) => (
             <Button
               key={percent}
               variant="ghost"
               size="sm"
-              className="h-7 text-xs font-semibold bg-surface-2/60 border border-default/30 text-secondary hover:text-primary hover:bg-river-blue/10 hover:border-river-blue/40 transition-all duration-200 rounded-md backdrop-blur-sm"
+              className="h-8 text-xs font-semibold bg-surface-2/60 border border-default/30 text-secondary hover:text-primary hover:bg-river-blue/10 hover:border-river-blue/40 transition-all duration-200 rounded-lg backdrop-blur-sm hover:scale-105 active:scale-95"
               onClick={() => handlePercentageClick(percent)}
             >
               {percent}%
@@ -575,4 +578,6 @@ export default function TradingForm({
       </div>
     </div>
   );
-}
+});
+
+export default TradingForm;

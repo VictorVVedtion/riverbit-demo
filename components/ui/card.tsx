@@ -2,20 +2,20 @@ import * as React from "react";
 
 import { cn } from "./utils";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+const Card = React.memo(function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
       className={cn(
         // River Glass Card Foundation - Aurora 2024 Shock & Awe Standard
         "river-card bg-[rgba(20,20,41,0.95)] backdrop-blur-[64px] border-2 border-[rgba(0,212,255,0.3)] text-[#ffffff] flex flex-col gap-6 rounded-3xl transform-gpu transition-all duration-700 ease-out will-change-transform relative overflow-hidden",
-        // Aurora 2024 Ultra-Dimensional Glass Effect with Extreme Multi-layer Shadows
-        "shadow-[0_16px_64px_rgba(0,0,0,0.4),0_8px_32px_rgba(0,212,255,0.3),0_32px_128px_rgba(0,212,255,0.1),0_2px_0_rgba(255,255,255,0.15)_inset]",
-        "hover:shadow-[0_32px_128px_rgba(0,0,0,0.5),0_16px_64px_rgba(0,212,255,0.6),0_64px_256px_rgba(0,212,255,0.3),0_4px_0_rgba(255,255,255,0.2)_inset]",
-        // Aurora Enhanced Hover States with Dramatic Scale and Translation
-        "hover:-translate-y-6 hover:scale-[1.04] hover:border-[rgba(0,212,255,0.8)] hover:backdrop-blur-[80px] hover:saturate-[1.8] hover:brightness-[1.1]",
-        // Ultra-Smooth Interaction Feedback
-        "active:scale-[1.02] active:translate-y-[-8px] active:shadow-[0_24px_96px_rgba(0,212,255,0.4)]",
+        // Professional Trading Card Shadows - Refined for Performance
+        "shadow-[0_8px_32px_rgba(0,0,0,0.3),0_4px_16px_rgba(0,212,255,0.2),0_16px_64px_rgba(0,212,255,0.08),0_1px_0_rgba(255,255,255,0.1)_inset]",
+        "hover:shadow-[0_16px_64px_rgba(0,0,0,0.4),0_8px_32px_rgba(0,212,255,0.4),0_32px_128px_rgba(0,212,255,0.15),0_2px_0_rgba(255,255,255,0.15)_inset]",
+        // Smooth Professional Hover States
+        "hover:-translate-y-2 hover:scale-[1.02] hover:border-[rgba(0,212,255,0.6)] hover:backdrop-blur-[72px] hover:saturate-[1.3] hover:brightness-[1.05]",
+        // Professional Interaction Feedback
+        "active:scale-[1.01] active:translate-y-[-1px] active:shadow-[0_12px_48px_rgba(0,212,255,0.3)]",
         // Aurora Dynamic Gradient Overlay for Ultra Depth
         "before:absolute before:inset-0 before:bg-gradient-to-br before:from-[rgba(0,212,255,0.15)] before:via-[rgba(123,63,242,0.08)] before:to-[rgba(255,0,229,0.1)] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-700 before:pointer-events-none after:absolute after:inset-0 after:bg-[conic-gradient(from_0deg_at_50%_50%,rgba(0,212,255,0.1),rgba(123,63,242,0.1),rgba(255,0,229,0.1),rgba(0,212,255,0.1))] after:opacity-0 hover:after:opacity-40 after:blur-2xl after:transition-all after:duration-500 after:-z-10",
         className,
@@ -23,7 +23,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
       {...props}
     />
   );
-}
+});
 
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
