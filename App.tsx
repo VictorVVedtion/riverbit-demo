@@ -14,7 +14,7 @@ import ShortcutHelp from './components/ShortcutHelp';
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { Button } from './components/ui/button';
 import { connectWallet, disconnectWallet, toggleFavorite } from './utils/helpers';
-import { HelpCircle, Wallet, Check, User, TrendingUp, Briefcase, Waves, Gift, DollarSign, Users, Settings as SettingsIcon, Sparkles } from 'lucide-react';
+import { HelpCircle, Wallet, Check, User, TrendingUp, Briefcase, Waves, Gift, DollarSign, Users, Settings as SettingsIcon, Sparkles, Menu, X } from 'lucide-react';
 import RiverBitLogo from './components/RiverBitLogo';
 import { Toaster } from './components/ui/sonner';
 import { toast } from 'sonner';
@@ -59,6 +59,9 @@ const App = () => {
   
   // 快捷键帮助状态
   const [showShortcutHelp, setShowShortcutHelp] = useState(false);
+  
+  // Mobile navigation state
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   // Web3连接状态
   const [web3Connected, setWeb3Connected] = useState(false);
@@ -140,11 +143,33 @@ const App = () => {
         event.preventDefault();
         setShowShortcutHelp(true);
       }
+      
+      // ESC key closes mobile menu
+      if (event.key === 'Escape' && showMobileMenu) {
+        setShowMobileMenu(false);
+      }
     };
 
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
-  }, []);
+  }, [showMobileMenu]);
+
+  // Close mobile menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showMobileMenu && event.target instanceof Element) {
+        const nav = event.target.closest('nav');
+        if (!nav) {
+          setShowMobileMenu(false);
+        }
+      }
+    };
+
+    if (showMobileMenu) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [showMobileMenu]);
 
   // Navigation component - Professional Exchange Navigation with River Theme
   const Navigation = () => {
@@ -167,9 +192,15 @@ const App = () => {
     };
     
     return (
-    <nav className="h-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/50 flex-shrink-0 relative z-50 shadow-xl overflow-hidden">
-      {/* 专业渐变底边效果 */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/50 to-transparent"></div>
+    <nav className="h-20 flex-shrink-0 relative z-50 shadow-trading overflow-hidden liquid-glass-navigation">
+      {/* Liquid Glass Morphism Layer - Matching Main Interface */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/20 via-slate-800/10 to-slate-900/20 backdrop-blur-xl"></div>
+      
+      {/* Professional River-themed Bottom Glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-600/30 via-slate-500/20 to-transparent"></div>
+      
+      {/* Subtle Inner Reflection - Professional Glassmorphism */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-transparent pointer-events-none"></div>
       
       <div className="px-6 lg:px-8 h-full relative z-10">
         <div className="flex items-center justify-between h-full">
@@ -180,12 +211,12 @@ const App = () => {
               <RiverBitLogo 
                 size="large" 
                 priority={true}
-                className="h-12 w-auto riverbit-logo high-dpi-sharp filter drop-shadow-xl" 
+                className="h-12 w-auto riverbit-logo high-dpi-sharp filter drop-shadow-lg" 
               />
-              <div className="hidden md:block h-6 w-px bg-gradient-to-b from-transparent via-gray-600 to-transparent"></div>
+              <div className="hidden md:block h-6 w-px bg-gradient-to-b from-transparent via-slate-600/40 to-transparent"></div>
             </div>
             
-            {/* Professional Navigation Menu - 统一专业色调体系 */}
+            {/* Professional Navigation Menu - River Theme Integration */}
             <div className="hidden lg:flex items-center space-x-1">
               {[
                 { id: 'trading', label: 'Trade', icon: TrendingUp },
@@ -197,13 +228,21 @@ const App = () => {
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden ${
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 relative overflow-hidden group ${
                     currentPage === item.id
-                      ? 'bg-slate-800/80 text-white border border-slate-600/50 shadow-lg backdrop-blur-sm'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/40 hover:backdrop-blur-sm'
+                      ? 'bg-slate-800/40 text-slate-200 border border-slate-600/30 shadow-lg backdrop-blur-md liquid-glass-active'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/25 hover:backdrop-blur-md hover:border hover:border-slate-700/20 liquid-glass-subtle'
                   }`}
                 >
-                  <span className="flex items-center space-x-2">
+                  {/* Active State Glow Effect */}
+                  {currentPage === item.id && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-700/20 via-slate-600/30 to-slate-700/20 rounded-xl"></div>
+                  )}
+                  
+                  {/* Hover Shimmer Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  
+                  <span className="flex items-center space-x-2 relative z-10">
                     <item.icon className="w-4 h-4" />
                     <span>{item.label}</span>
                   </span>
@@ -212,15 +251,27 @@ const App = () => {
             </div>
           </div>
           
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 p-2 backdrop-blur-md rounded-lg border border-transparent hover:border-slate-700/20 liquid-glass-subtle"
+            >
+              {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </Button>
+          </div>
+          
           {/* Right Section - Professional Wallet & Account */}
-          <div className="flex items-center space-x-4">
-            {/* Enhanced Wallet Connection with Web3 Integration */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {/* Enhanced Wallet Connection with Glassmorphism */}
             {web3Connected ? (
               <div className="flex items-center space-x-3">
                 {accountInfo && (
-                  <div className="hidden lg:block text-right">
-                    <div className="text-xs text-gray-400">Balance</div>
-                    <div className="text-sm font-mono font-semibold text-white">
+                  <div className="hidden lg:block text-right px-3 py-2 rounded-lg bg-slate-800/20 backdrop-blur-md border border-slate-700/20">
+                    <div className="text-xs text-slate-400">Balance</div>
+                    <div className="text-sm font-mono font-semibold text-slate-200">
                       ${parseFloat(accountInfo.equity).toLocaleString('en-US', { maximumFractionDigits: 2 })}
                     </div>
                   </div>
@@ -228,13 +279,13 @@ const App = () => {
                 <Button 
                   variant="outline"
                   onClick={disconnectWallet}
-                  className={`river-glass-subtle border-river-profit/40 text-river-profit hover:river-glow-profit px-4 py-2 river-ripple ${
-                    !isValidNetwork ? 'border-orange-400/40 text-orange-400' : ''
+                  className={`bg-slate-800/30 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:border-green-400/50 px-4 py-2 backdrop-blur-md transition-all duration-300 liquid-glass-success ${
+                    !isValidNetwork ? 'border-orange-400/30 text-orange-400 hover:bg-orange-500/10' : ''
                   }`}
                   data-wallet-button
                 >
                   <div className={`w-2 h-2 rounded-full mr-2 animate-pulse ${
-                    isValidNetwork ? 'bg-river-profit' : 'bg-orange-400'
+                    isValidNetwork ? 'bg-green-400' : 'bg-orange-400'
                   }`}></div>
                   <span className="font-mono text-sm">
                     {web3Address?.slice(0, 6)}...{web3Address?.slice(-4)}
@@ -244,7 +295,7 @@ const App = () => {
                   <Button 
                     onClick={switchToValidNetwork}
                     size="sm"
-                    className="bg-orange-600 hover:bg-orange-700 text-white"
+                    className="bg-orange-600/80 hover:bg-orange-700/90 text-white backdrop-blur-md border border-orange-500/30"
                   >
                     Switch Network
                   </Button>
@@ -253,7 +304,7 @@ const App = () => {
             ) : (
               <Button 
                 onClick={connectWallet}
-                className="bg-slate-800/60 hover:bg-slate-700/80 text-white border border-slate-600/50 hover:border-slate-500/70 px-4 py-2 font-medium transition-all duration-200 backdrop-blur-sm"
+                className="bg-slate-800/30 hover:bg-slate-700/40 text-slate-300 hover:text-slate-200 border border-slate-600/30 hover:border-slate-500/40 px-4 py-2 font-medium transition-all duration-300 backdrop-blur-md shadow-lg liquid-glass-button"
                 data-wallet-button
               >
                 <Wallet className="w-4 h-4 mr-2" />
@@ -261,20 +312,20 @@ const App = () => {
               </Button>
             )}
             
-            {/* Help Button */}
+            {/* Help Button with Glassmorphism */}
             <Button 
               variant="ghost" 
               size="sm"
               onClick={() => setShowShortcutHelp(true)}
-              className="text-gray-400 hover:text-white hover:bg-slate-800/50 p-2"
+              className="text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 p-2 transition-all duration-300 backdrop-blur-md rounded-lg border border-transparent hover:border-slate-700/20 liquid-glass-subtle"
             >
               <HelpCircle className="w-5 h-5" />
             </Button>
             
-            {/* Enhanced Status Badge with Web3 Info */}
-            <div className="hidden xl:flex items-center text-xs text-gray-400 bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-700">
+            {/* Enhanced Status Badge with Professional Glassmorphism */}
+            <div className="hidden xl:flex items-center text-xs text-slate-300 bg-slate-800/25 px-3 py-2 rounded-lg border border-slate-700/20 shadow-lg backdrop-blur-md liquid-glass-status">
               <div className={`w-2 h-2 rounded-full mr-2 animate-pulse ${
-                web3Connected && isValidNetwork ? 'bg-green-400' : web3Connected ? 'bg-orange-400' : 'bg-gray-400'
+                web3Connected && isValidNetwork ? 'bg-green-400' : web3Connected ? 'bg-orange-400' : 'bg-slate-400'
               }`}></div>
               <span className="font-medium">
                 {web3Connected && isValidNetwork ? 'Live Trading' : web3Connected ? 'Wrong Network' : 'Demo Mode'}
@@ -283,6 +334,100 @@ const App = () => {
           </div>
         </div>
       </div>
+      
+      {/* Mobile Navigation Menu - Professional Glassmorphism */}
+      {showMobileMenu && (
+        <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-gradient-to-br from-slate-950/98 via-slate-900/95 to-slate-950/98 backdrop-blur-xl border-b border-slate-800/30 liquid-glass-navigation">
+          <div className="px-6 py-6 space-y-4">
+            {/* Mobile Navigation Items */}
+            <div className="space-y-2">
+              {[
+                { id: 'trading', label: 'Trade', icon: TrendingUp },
+                { id: 'personal', label: 'Portfolio', icon: User },
+                { id: 'riverpool', label: 'RiverPool', icon: Waves },
+                { id: 'referral', label: 'Earn', icon: Gift },
+                { id: 'dev', label: 'More', icon: SettingsIcon },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    handleNavigate(item.id);
+                    setShowMobileMenu(false);
+                  }}
+                  className={`w-full px-4 py-3 rounded-xl text-left transition-all duration-300 relative overflow-hidden group ${
+                    currentPage === item.id
+                      ? 'bg-slate-800/40 text-slate-200 border border-slate-600/30 shadow-lg backdrop-blur-md liquid-glass-active'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/25 hover:backdrop-blur-md hover:border hover:border-slate-700/20 liquid-glass-subtle'
+                  }`}
+                >
+                  {/* Active State Glow Effect */}
+                  {currentPage === item.id && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-slate-700/20 via-slate-600/30 to-slate-700/20 rounded-xl"></div>
+                  )}
+                  
+                  {/* Hover Shimmer Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  
+                  <span className="flex items-center space-x-3 relative z-10">
+                    <item.icon className="w-5 h-5" />
+                    <span className="font-medium">{item.label}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+            
+            {/* Mobile Wallet Section */}
+            <div className="pt-4 border-t border-slate-700/30">
+              {web3Connected ? (
+                <div className="space-y-3">
+                  {accountInfo && (
+                    <div className="px-4 py-3 rounded-lg bg-slate-800/20 backdrop-blur-md border border-slate-700/20">
+                      <div className="text-xs text-slate-400">Balance</div>
+                      <div className="text-sm font-mono font-semibold text-slate-200">
+                        ${parseFloat(accountInfo.equity).toLocaleString('en-US', { maximumFractionDigits: 2 })}
+                      </div>
+                    </div>
+                  )}
+                  <Button 
+                    variant="outline"
+                    onClick={disconnectWallet}
+                    className="w-full bg-slate-800/30 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:border-green-400/50 backdrop-blur-md transition-all duration-300 liquid-glass-success"
+                  >
+                    <div className="w-2 h-2 rounded-full mr-2 animate-pulse bg-green-400"></div>
+                    <span className="font-mono text-sm">
+                      {web3Address?.slice(0, 6)}...{web3Address?.slice(-4)}
+                    </span>
+                  </Button>
+                </div>
+              ) : (
+                <Button 
+                  onClick={() => {
+                    connectWallet();
+                    setShowMobileMenu(false);
+                  }}
+                  className="w-full bg-slate-800/30 hover:bg-slate-700/40 text-slate-300 hover:text-slate-200 border border-slate-600/30 hover:border-slate-500/40 font-medium transition-all duration-300 backdrop-blur-md shadow-lg liquid-glass-button"
+                >
+                  <Wallet className="w-4 h-4 mr-2" />
+                  Connect Wallet
+                </Button>
+              )}
+              
+              {/* Mobile Help Button */}
+              <Button 
+                variant="ghost" 
+                onClick={() => {
+                  setShowShortcutHelp(true);
+                  setShowMobileMenu(false);
+                }}
+                className="w-full mt-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-300 backdrop-blur-md liquid-glass-subtle"
+              >
+                <HelpCircle className="w-5 h-5 mr-2" />
+                Help & Shortcuts
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
     );
   };

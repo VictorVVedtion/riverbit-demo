@@ -42,6 +42,10 @@ import AIAssistantManager from '../trading-assistant/AIAssistantManager';
 import AIMobileOptimized from '../trading-assistant/AIMobileOptimized';
 import { useIsMobile } from '../ui/use-mobile';
 
+// Import new Plan Generator components
+import { PlanGeneratorChat } from '../ai/PlanGeneratorChat';
+import { TradingPlan } from '../ai/TradingPlanCard';
+
 interface TradingPageProps {
   selectedTradingPair: string;
   setSelectedTradingPair: (pair: string) => void;
@@ -80,7 +84,6 @@ export default function TradingPage({
   const [showPositionSummary, setShowPositionSummary] = useState(false);
   
   // AI Assistant states
-  const [isAIOpen, setIsAIOpen] = useState(false);
   const [isMobileAIOpen, setIsMobileAIOpen] = useState(false);
   const isMobile = useIsMobile();
   
@@ -441,8 +444,8 @@ export default function TradingPage({
 
         {/* SOTA Professional Trading Panel - Liquid Glass Design */}
         <div className="w-full lg:w-96 border-t lg:border-t-0 lg:border-l border-default/30 bg-surface-1/90 backdrop-blur-sm flex flex-col h-[50vh] lg:h-auto flex-shrink-0">
-          <Tabs defaultValue="trading" className="h-full flex flex-col">
-            <TabsList className="grid w-full grid-cols-4 mx-3 lg:mx-4 mt-3 mb-2 h-10 lg:h-11 bg-surface-2/80 backdrop-blur-sm border border-default/30 rounded-lg shadow-trading">
+          <Tabs defaultValue="trading" className="flex-1 flex flex-col">
+            <TabsList className="grid w-full grid-cols-3 mx-3 lg:mx-4 mt-3 mb-2 h-10 lg:h-11 bg-surface-2/80 backdrop-blur-sm border border-default/30 rounded-lg shadow-trading">
               <TabsTrigger value="trading" className="text-sm lg:text-base font-semibold text-secondary data-[state=active]:text-foreground data-[state=active]:bg-gradient-to-b data-[state=active]:from-surface-3 data-[state=active]:to-surface-2 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-river-blue/40 rounded-md transition-all duration-300 hover:text-foreground px-2 lg:px-4">Trade</TabsTrigger>
               <TabsTrigger value="orderbook" className="text-sm lg:text-base font-semibold text-secondary data-[state=active]:text-foreground data-[state=active]:bg-gradient-to-b data-[state=active]:from-surface-3 data-[state=active]:to-surface-2 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-river-blue/40 rounded-md transition-all duration-300 hover:text-foreground px-2 lg:px-4">
                 <span className="hidden lg:inline">Orderbook</span>
@@ -451,15 +454,6 @@ export default function TradingPage({
               <TabsTrigger value="trades" className="text-sm lg:text-base font-semibold text-secondary data-[state=active]:text-foreground data-[state=active]:bg-gradient-to-b data-[state=active]:from-surface-3 data-[state=active]:to-surface-2 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-river-blue/40 rounded-md transition-all duration-300 hover:text-foreground px-2 lg:px-4">
                 <span className="hidden lg:inline">Trades</span>
                 <span className="lg:hidden">Hist</span>
-              </TabsTrigger>
-              <TabsTrigger 
-                value="ai" 
-                className="text-sm lg:text-base font-semibold text-secondary data-[state=active]:text-foreground data-[state=active]:bg-gradient-to-b data-[state=active]:from-river-blue/20 data-[state=active]:to-river-blue/10 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-river-blue/50 rounded-md transition-all duration-300 hover:text-foreground flex items-center gap-1 px-2 lg:px-4" 
-                data-ai-tab
-                onClick={() => !isMobile && setIsAIOpen(true)}
-              >
-                <Bot className="w-3 h-3 hidden lg:block text-river-blue animate-pulse" />
-                <span className="bg-gradient-to-r from-river-blue to-river-accent bg-clip-text text-transparent font-bold">AI</span>
               </TabsTrigger>
             </TabsList>
 
@@ -982,54 +976,42 @@ export default function TradingPage({
               />
             </TabsContent>
 
-            <TabsContent value="ai" className="flex-1 overflow-hidden p-2">
-              {isMobile ? (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center space-y-4">
-                    <div className="p-4 rounded-xl bg-gradient-to-br from-river-blue-main/20 to-river-accent/20 border border-river-blue/30 mx-auto w-fit">
-                      <Bot className="h-12 w-12 text-river-blue-main animate-pulse mx-auto" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold bg-gradient-to-r from-river-blue-main to-river-accent bg-clip-text text-transparent">
-                        RiverBit AI Assistant
-                      </h3>
-                      <p className="text-muted-foreground text-sm mt-2">
-                        Enhanced mobile experience available
-                      </p>
-                    </div>
-                    <Button
-                      onClick={() => setIsMobileAIOpen(true)}
-                      className="bg-gradient-to-r from-river-blue-main via-river-blue-light to-river-accent text-white border border-river-blue/30 hover:shadow-lg transition-all duration-300"
-                    >
-                      <Bot className="h-4 w-4 mr-2" />
-                      Open AI Assistant
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <Suspense 
-                  fallback={
-                    <div className="flex items-center justify-center h-full text-muted">
-                      <div className="flex items-center space-x-2">
-                        <Bot className="w-4 h-4 animate-pulse text-river-blue" />
-                        <span className="text-sm">Loading AI Assistant...</span>
-                      </div>
-                    </div>
-                  }
-                >
-                  <TradingAssistantChat 
-                    className="h-full bg-surface-1 border-default ai-gradient-bg"
-                    userAddress={walletAddress}
-                    isConnected={isWalletConnected}
-                    accountBalance={accountData.availableBalance}
-                    onPlanExecute={handleAIPlanExecute}
-                    onPlanBookmark={handleAIPlanBookmark}
-                    onPlanShare={handleAIPlanShare}
-                  />
-                </Suspense>
-              )}
-            </TabsContent>
           </Tabs>
+          
+          {/* AI Plan Generator Section - 零门槛交易助手 */}
+          <div className="border-t border-default/30 bg-surface-1/90 backdrop-blur-sm flex-shrink-0">
+            <div className="p-3 lg:p-4">
+              <PlanGeneratorChat
+                accountBalance={accountData.availableBalance}
+                onExecutePlan={(plan: TradingPlan) => {
+                  // 将AI计划转换为交易表单
+                  setOrderSide(plan.direction === 'long' ? 'buy' : 'sell');
+                  setOrderType(plan.entryType === 'market' ? 'market' : 'limit');
+                  if (plan.entryType === 'limit') {
+                    setPrice(plan.entryPrice.toString());
+                  }
+                  setAmount((plan.positionSize * accountData.availableBalance / 100).toString());
+                  setLeverage(10); // 默认杠杆
+                  
+                  toast.success('计划已加载到交易表单', {
+                    description: `${plan.direction === 'long' ? '买入' : '卖出'} ${plan.symbol} 计划已准备就绪`
+                  });
+                }}
+                onSimulatePlan={(plan: TradingPlan) => {
+                  const planText = `模拟交易计划：${plan.direction === 'long' ? '买入' : '卖出'} ${plan.symbol}\n` +
+                    `入场价: $${plan.entryPrice}\n` +
+                    `止损价: $${plan.stopLoss}\n` +
+                    `目标价: $${plan.takeProfit}\n` +
+                    `仓位: ${plan.positionSize}%`;
+                  
+                  toast.success('模拟计划已启动', {
+                    description: planText.replace(/\n/g, ' ')
+                  });
+                }}
+                className="max-w-none"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1212,6 +1194,7 @@ export default function TradingPage({
           </TabsContent>
         </Tabs>
       </div>
+
 
       {/* AI Assistant Manager - Desktop floating buttons and dialogs */}
       {!isMobile && (

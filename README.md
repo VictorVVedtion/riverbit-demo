@@ -105,7 +105,7 @@ pnpm preview
 
 ## 🎯 Demo
 
-🚀 **Live Demo**: [RiverBit Trading Platform](https://riverbit-demo.vercel.app)
+🚀 **Live Demo**: [RiverBit Trading Platform](https://xxxdemo.vercel.app) *(或本地运行 `pnpm dev`)*
 
 ### Demo Features
 - **AI Trading Chat**: Try natural language trading commands
