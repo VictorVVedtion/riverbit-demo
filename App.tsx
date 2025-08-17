@@ -351,8 +351,7 @@ const App = () => {
       <Navigation />
       <div className="flex-1 overflow-y-auto bg-slate-950" data-navigation>
         {renderCurrentPage()}
-      </div>
-
+        
         {/* 新用户引导 - 已禁用，用户不喜欢 */}
         {/* <NewUserOnboarding
           isOpen={showOnboarding}

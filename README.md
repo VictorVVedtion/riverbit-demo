@@ -1,4 +1,4 @@
-#xxx demo
+# RiverBit Trading Platform Demo
 
 🚀 世界首个集成AI交易助手的DeFi交易平台 - RiverBit是一个基于 React + TypeScript + Tailwind CSS 构建的现代化 DeFi 交易平台，具备智能交易助手、风险管理、流动性挖矿等完整功能。
 
@@ -16,11 +16,10 @@
 完整的技术文档和使用指南请查看：**[📖 文档中心](./docs/README.md)**
 
 ### 🚀 快速导航
-- [项目概览](./PROJECT_OVERVIEW.md) - 项目整体介绍和架构说明
 - [AI Trading Assistant](./docs/AI_TRADING_ASSISTANT.md) - 智能交易助手文档
 - [技术架构](./ARCHITECTURE_SUMMARY.md) - 系统架构详细分析  
-- [智能合约](./contracts/README.md) - 区块链集成文档
-- [实施指南](./IMPLEMENTATION_GUIDE.md) - 部署和开发指南
+- [智能合约](./archive/testnet/contracts/README.md) - 区块链集成文档
+- [实施指南](./docs/implementation/IMPLEMENTATION_GUIDE.md) - 部署和开发指南
 
 ## 🚀 快速开始
 
@@ -66,18 +65,16 @@ pnpm preview
 ## 📖 更多信息
 
 ### 开发和部署
-- [实施指南](./IMPLEMENTATION_GUIDE.md) - 完整的开发环境设置和部署流程
-- [代码组织](./CODE_ORGANIZATION.md) - 项目结构和开发规范
+- [实施指南](./docs/implementation/IMPLEMENTATION_GUIDE.md) - 完整的开发环境设置和部署流程
 - [测试文档](./testing/README.md) - 测试策略和自动化流程
 
 ### 设计和用户体验  
-- [RiverBit 颜色系统](./RIVERBIT_COLOR_SYSTEM.md) - 设计系统和品牌规范
-- [UI/UX 审查报告](./DEX_UI_UX_REVIEW_REPORT.md) - 用户体验优化分析
+- [专业色彩实现](./docs/implementation/AURORA_PROFESSIONAL_COLOR_IMPLEMENTATION_REPORT.md) - 设计系统和品牌规范
+- [资产选择器指南](./docs/implementation/ASSET_SELECTOR_IMPLEMENTATION_GUIDE.md) - 资产选择器实现文档
 
 ### 区块链和Web3
-- [智能合约部署](./contracts/DEPLOYMENT_GUIDE.md) - 合约部署完整指南
-- [Arbitrum Sepolia 设置](./ARBITRUM_SEPOLIA_SETUP.md) - 测试网络环境配置
-- [Web3集成优化](./WEB3_INTEGRATION_OPTIMIZATION_GUIDE.md) - Web3集成最佳实践
+- [智能合约部署](./archive/testnet/contracts/DEPLOYMENT_GUIDE.md) - 合约部署完整指南
+- [测试网络设置](./archive/testnet/docs/ARBITRUM_SEPOLIA_SETUP.md) - 测试网络环境配置
 
 ## 🤝 贡献
 

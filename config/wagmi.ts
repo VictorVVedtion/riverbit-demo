@@ -3,51 +3,20 @@
  * Designed to work without backend dependencies and external API calls
  */
 
+import { createConfig, http } from 'wagmi'
+import { arbitrum, arbitrumSepolia } from 'wagmi/chains'
+
 // Mock configuration for frontend demo mode
 export const projectId = 'riverbit-frontend-demo'
 
-// Simplified chains configuration for demo
-export const chains = [
-  {
-    id: 421614,
-    name: 'Arbitrum Sepolia',
-    network: 'arbitrum-sepolia',
-    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    rpcUrls: {
-      default: { http: ['https://sepolia-rollup.arbitrum.io/rpc'] },
-      public: { http: ['https://sepolia-rollup.arbitrum.io/rpc'] }
-    },
-    blockExplorers: {
-      default: { name: 'Arbiscan', url: 'https://sepolia.arbiscan.io' }
-    },
-    testnet: true
-  },
-  {
-    id: 42161,
-    name: 'Arbitrum One',
-    network: 'arbitrum',
-    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    rpcUrls: {
-      default: { http: ['https://arb1.arbitrum.io/rpc'] },
-      public: { http: ['https://arb1.arbitrum.io/rpc'] }
-    },
-    blockExplorers: {
-      default: { name: 'Arbiscan', url: 'https://arbiscan.io' }
-    },
-    testnet: false
-  }
-]
-
 // Demo-only configuration that doesn't actually connect to Web3
-export const config = {
-  chains,
-  connectors: [],
-  transports: {},
-  // Mock methods for demo compatibility
-  getClient: () => null,
-  getPublicClient: () => null,
-  getWalletClient: () => null
-}
+export const config = createConfig({
+  chains: [arbitrum, arbitrumSepolia],
+  transports: {
+    [arbitrum.id]: http(),
+    [arbitrumSepolia.id]: http(),
+  },
+})
 
 // Mock modal for demo mode
 export const modal = {
